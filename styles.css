@@ -38,3 +38,30 @@ a:hover {
 .d-none {
     display: none !important;
 }
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand-text {
+    color: #F2BED1;
+}
+
+.navbar-brand .navbar-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    margin-left: 10px;
+}
+
+.navbar-brand .navbar-text span {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.navbar-brand img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
