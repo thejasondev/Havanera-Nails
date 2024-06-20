@@ -22,3 +22,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+document.getElementById("logo-link").addEventListener("click", function() {
+    document.getElementById("inicio").scrollIntoView({ behavior: "smooth" });
+});
+
+document.getElementById('ver-mas-btn').addEventListener('click', function() {
+    var extraText = document.getElementById('extra-text');
+    if (extraText.style.display === 'none') {
+        extraText.style.display = 'block';
+        this.textContent = 'Ver menos';
+    } else {
+        extraText.style.display = 'none';
+        this.textContent = 'Ver más';
+    }
+});
+
+
+
