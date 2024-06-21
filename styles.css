@@ -49,20 +49,21 @@ a:hover {
 }
 
 .brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
     color: #F2BED1;
 }
 
-.navbar-brand .navbar-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
-    margin-left: 10px;
-}
-
-.navbar-brand .navbar-text span {
-    text-align: center;
+.brand-line {
     font-size: 1.25rem;
     font-weight: bold;
+    text-align: left;
+}
+
+.brand-line:first-child {
+    margin-bottom: 0;
 }
 
 .navbar-brand img {
