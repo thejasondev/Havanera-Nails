@@ -23,9 +23,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.getElementById("logo-link").addEventListener("click", function() {
-    document.getElementById("inicio").scrollIntoView({ behavior: "smooth" });
+document.getElementById("logo-link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevenir la acción por defecto del enlace
+
+    // Obtener todas las secciones
+    const sections = document.querySelectorAll('section');
+
+    // Ocultar todas las secciones
+    sections.forEach(section => {
+        section.classList.add('d-none');
+    });
+
+    // Mostrar la sección de inicio
+    const inicioSection = document.getElementById("inicio");
+    inicioSection.classList.remove('d-none');
+
+    // Desplazarse suavemente a la sección de inicio
+    inicioSection.scrollIntoView({ behavior: "smooth" });
 });
+
 
 document.getElementById('ver-mas-btn').addEventListener('click', function() {
     var extraText = document.getElementById('extra-text');
