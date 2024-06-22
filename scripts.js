@@ -42,7 +42,7 @@ document.getElementById("logo-link").addEventListener("click", function(event) {
     inicioSection.scrollIntoView({ behavior: "smooth" });
 });
 
-
+//Botón 'Ver más' de la sección de Inicio.
 document.getElementById('ver-mas-btn').addEventListener('click', function() {
     var extraText = document.getElementById('extra-text');
     if (extraText.style.display === 'none') {
@@ -54,5 +54,16 @@ document.getElementById('ver-mas-btn').addEventListener('click', function() {
     }
 });
 
+// Botón "Ver más" de la sección Productos y Servicios
+document.getElementById('ver-mas-btn-productos').addEventListener('click', function() {
+    var extraTextProductos = document.getElementById('extra-text-productos');
+    if (extraTextProductos.style.display === 'none') {
+        extraTextProductos.style.display = 'block';
+        this.textContent = 'Ver menos';
+    } else {
+        extraTextProductos.style.display = 'none';
+        this.textContent = 'Ver más';
+    }
+});
 
 
