@@ -10,6 +10,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navegación -->
@@ -64,44 +65,66 @@
                 <h3>Nuestros Servicios</h3>
                 <p>En Havanera Nails, sabemos que cada cliente es único. Ofrecemos opciones personalizadas para que tus uñas reflejen tu estilo personal:</p>
                 <button id="ver-mas-btn-productos" class="btn btn-primary">Ver más</button>
-                <p id="extra-text-productos" class="extra-text" style="display: none;">
-                    <ul>
-                        <li>
+                <div id="extra-text-productos" class="extra-text" style="display: none;">
+                            <div class="card">
                             <h3>Manicura Profesional</h3>
                             <p>Nivelación con rubber base para una base duradera y saludable.</p>
                             <p>Amplia gama de colores en pintura de gel para un acabado perfecto.</p>
-                        </li>
-                        <li>
+                            </div>
+
+                            <div class="card">
                             <h3>Pedicura Especializada</h3>
-                            <p>Cuidado completo de tus pies con exfoliación y tratamientos hidratantes.</p>
                             <p>Aplicación de pintura de gel para uñas impecables y duraderas.</p>
-                        </li>
-                        <li>
+                            </div>
+
+                            <div class="card">
                             <h3>Diseño y Personalización</h3>
                             <p>Diseños a la medida para cada ocasión.</p>
                             <p>Decoración con elementos como piedras, glitter, y efectos especiales.</p>
-                        </li>
-                        <li>
+                            </div>
+
+                            <div class="card">
                             <h3>Materiales y Productos Utilizados</h3>
                             <p>Rubber Base: Usamos rubber base de alta calidad para garantizar una mayor durabilidad y salud de tus uñas.</p>
                             <p>Pintura de Gel: Nuestra pintura de gel es resistente y de larga duración, disponible en una amplia variedad de colores.</p>
-                        </li>
-                    </ul>
-                </p>
-               </div>
+                            </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Sección Catálogo de Precios -->
     <section id="precios" class="container mt-5 d-none">
-        <div class="row">
-            <div class="col-md-12 text-center">
+        <div class="catalog">
                 <h2>Catálogo de Precios</h2>
-                <p>Consulta nuestros precios competitivos para cada servicio.</p>
-            </div>
+        <div class="category">
+            <h3>Servicios de Manicura</h3>
+            <ul>
+                <li>
+                    <span class="service-name">Manicura Básica</span>
+                    <span class="service-price">$25</span>
+                    <p class="service-description">Incluye corte, limado y esmaltado sencillo.</p>
+                </li>
+                <li>
+                    <span class="service-name">Manicura con Gel</span>
+                    <span class="service-price">$35</span>
+                    <p class="service-description">Manicura completa con aplicación de gel UV.</p>
+                </li>
+            </ul>
         </div>
-        <!-- Aquí se agregará el catálogo de precios -->
+
+        <div class="category">
+            <h3>Servicios de Pedicura</h3>
+            <ul>
+                <li>
+                    <span class="service-name">Pedicura Básica</span>
+                    <span class="service-price">$30</span>
+                    <p class="service-description">Incluye remojo, exfoliación y esmaltado sencillo.</p>
+                </li>
+            </ul>
+        </div>
+        </div> 
     </section>
 
     <!-- Sección Galería -->
@@ -117,10 +140,10 @@
 
     <!-- Pie de Página -->
     <footer class="bg-light text-center p-3 mt-5">
-        <p>&copy; 2024 Havanera Nails. Todos los derechos reservados.</p>
         <a href="https://instagram.com/havanera_nails_" target="_blank">Instagram</a> | 
         <a href="https://facebook.com/havanera.nails" target="_blank">Facebook</a>
         <p>¿Listo para una transformación? <a href="https://wa.me/+5355118387" target="_blank">Reserva tu cita aquí</a> para experimentar lo mejor en cuidado de uñas.</p>
+        <p>&copy; 2024 Havanera Nails. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Bootstrap JS y jQuery -->
