@@ -114,7 +114,7 @@ li:hover {
     background-color: #F2BED1;
 }
 
-.extra-text-productos {
+.extra-text-servicios {
     margin-top: 10px;
 }
 
@@ -137,6 +137,24 @@ li:hover {
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.galeria{
+    display: flex;
+    height: 20rem;
+    margin-top: 10px;
+    gap: 1rem;
+}
+.galeria > div {
+    flex: 1;
+    border-radius: 1rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    transition: all .8s cubic-bezier(.25, .4, .45, 1.4);
+}
+.galeria > div:hover {
+    flex: 5;
 }
 
 @media (max-width: 768px) {
