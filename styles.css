@@ -130,6 +130,10 @@ li:hover {
     overflow: hidden;
 }
 
+.card h3 {
+    color: #F2BED1;
+}
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
