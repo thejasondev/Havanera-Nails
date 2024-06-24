@@ -53,17 +53,3 @@ document.getElementById('ver-mas-btn').addEventListener('click', function() {
         this.textContent = 'Ver más';
     }
 });
-
-// Botón "Ver más" de la sección Productos y Servicios
-document.getElementById('ver-mas-btn-productos').addEventListener('click', function() {
-    var extraTextProductos = document.getElementById('extra-text-productos');
-    if (extraTextProductos.style.display === 'none') {
-        extraTextProductos.style.display = 'block';
-        this.textContent = 'Ver menos';
-    } else {
-        extraTextProductos.style.display = 'none';
-        this.textContent = 'Ver más';
-    }
-});
-
-

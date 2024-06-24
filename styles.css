@@ -99,21 +99,6 @@ li:hover {
     margin-top: 10px;
 }
 
-#ver-mas-btn-productos {
-    background-color: #FDCEDF;
-    border: none;
-    color: #333;
-    padding: 10px 20px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-#ver-mas-btn-productos:hover {
-    background-color: #F2BED1;
-}
-
 .extra-text-servicios {
     margin-top: 10px;
 }
