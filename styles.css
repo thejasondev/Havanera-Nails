@@ -332,3 +332,24 @@ li:last-child {
     color: white;
     cursor: pointer;
   }
+
+  /* Contacto */
+  #contacto {
+    text-align: center;
+    padding: 20px;
+  }
+
+  #map {
+    width: 100%;
+    height: 500px;
+    border: none;
+  }
+
+  #qrcode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Ajusta según el tamaño de tu QR */
+    width: 200px; /* Ajusta según el tamaño de tu QR */
+    margin:  auto;
+}
