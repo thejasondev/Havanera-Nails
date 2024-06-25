@@ -293,7 +293,7 @@ li:last-child {
     }
 }
 
-/* Galería */
+/* Galería lightbox */
 .gallery {
     display: flex;
     flex-wrap: wrap;

@@ -54,6 +54,7 @@ document.getElementById('ver-mas-btn').addEventListener('click', function() {
     }
 });
 
+//Galería lightbox!
 function openLightbox(img) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
