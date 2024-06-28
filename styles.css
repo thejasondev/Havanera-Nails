@@ -371,7 +371,7 @@ li:last-child {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50vh; /* Ajusta el tamaño para ocupar toda la altura de la ventana */
+    height: 30vh; /* Ajusta el tamaño para ocupar toda la altura de la ventana */
     text-align: center;
 }
 
