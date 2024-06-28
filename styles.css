@@ -355,11 +355,63 @@ li:last-child {
     border: 0;
 }
 
-  #qrcode {
+/* Contenedor para centrar los botones */
+.button-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 200px; /* Ajusta según el tamaño de tu QR */
-    width: 200px; /* Ajusta según el tamaño de tu QR */
-    margin:  auto;
+    height: 100%;
+    text-align: center;
+}
+
+/* Estilos para los botones */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Ajusta el tamaño para ocupar toda la altura de la ventana */
+    text-align: center;
+}
+
+/* Estilos para los botones */
+.call-btn, .whatsapp-btn {
+    display: inline-block;
+    width: auto;
+    margin-bottom: 20px;
+    font-size: 18px;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.call-btn {
+    background-color: #F2BED1;
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.whatsapp-btn {
+    background-color: #F2BED1;
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.call-btn:hover {
+    background-color: #0056b3;
+}
+
+.whatsapp-btn:hover {
+    background-color: #1ebe52;
+}
+
+/* Ajuste para dispositivos pequeños */
+@media (max-width: 768px) {
+    .call-btn, .whatsapp-btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
 }

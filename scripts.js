@@ -65,16 +65,3 @@ function openLightbox(img) {
   function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
   }
-
-  // URL que quieres convertir en código QR
-const url = 'https://instagram.com/havanera_nails_';
-
-// Crear el objeto QRCode y pasarlo al div con id 'qrcode'
-new QRCode(document.getElementById("qrcode"), {
-    text: url,
-    width: 128,
-    height: 128,
-    colorDark : "#000000",
-    colorLight : "#ffffff",
-    correctLevel : QRCode.CorrectLevel.H
-});
