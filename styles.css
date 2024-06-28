@@ -371,7 +371,8 @@ li:last-child {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 30vh; /* Ajusta el tamaño para ocupar toda la altura de la ventana */
+    padding: 20px;
+    margin-top: 20px; /* Añadimos un margen superior para separación */
     text-align: center;
 }
 
@@ -410,8 +411,14 @@ li:last-child {
 
 /* Ajuste para dispositivos pequeños */
 @media (max-width: 768px) {
+    .button-container {
+        padding: 10px; /* Reducimos el padding en dispositivos pequeños */
+        margin-top: 10px; /* Reducimos el margen superior en dispositivos pequeños */
+    }
+
     .call-btn, .whatsapp-btn {
         font-size: 16px;
         padding: 10px 20px;
+        width: 100%; /* Hacemos que los botones ocupen todo el ancho disponible */
     }
 }
