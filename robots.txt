@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://thejasondev.github.io/Havanera-Nails/sitemap.xml
