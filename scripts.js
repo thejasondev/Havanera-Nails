@@ -3,21 +3,24 @@ document.addEventListener("DOMContentLoaded", function() {
     const sections = document.querySelectorAll("section");
 
     function showSection(sectionId) {
-        sections.forEach(section => section.classList.add("d-none"));
-        document.getElementById(sectionId).classList.remove("d-none");
+        sections.forEach(section => {
+            if (section.id === sectionId) {
+                section.classList.remove("d-none");
+            } else {
+                section.classList.add("d-none");
+            }
+        });
     }
 
-    // Mostrar la sección correcta al cargar la página
     function loadSectionFromHash() {
-        const hash = window.location.hash.substring(1); // Quita el '#' del hash
-        if (hash) {
+        const hash = window.location.hash.substring(1);
+        if (hash && document.getElementById(hash)) {
             showSection(hash);
         } else {
             showSection("inicio");
         }
     }
 
-    // Manejar clic en enlaces de navegación
     navLinks.forEach(link => {
         link.addEventListener("click", function(event) {
             event.preventDefault();
@@ -27,10 +30,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Manejar cambios en el hash
     window.addEventListener("hashchange", loadSectionFromHash);
 
-    // Inicializa la sección correcta
     loadSectionFromHash();
 });
 
