@@ -1,27 +1,39 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtener todos los enlaces de navegación
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section');
+document.addEventListener("DOMContentLoaded", function() {
+    const navLinks = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll("section");
 
-    // Añadir evento de clic a cada enlace de navegación
+    function showSection(sectionId) {
+        sections.forEach(section => section.classList.add("d-none"));
+        document.getElementById(sectionId).classList.remove("d-none");
+    }
+
+    // Mostrar la sección correcta al cargar la página
+    function loadSectionFromHash() {
+        const hash = window.location.hash.substring(1); // Quita el '#' del hash
+        if (hash) {
+            showSection(hash);
+        } else {
+            showSection("inicio");
+        }
+    }
+
+    // Manejar clic en enlaces de navegación
     navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener("click", function(event) {
             event.preventDefault();
-            
-            // Obtener el ID de la sección a mostrar
-            const targetId = link.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            // Ocultar todas las secciones
-            sections.forEach(section => {
-                section.classList.add('d-none');
-            });
-
-            // Mostrar la sección seleccionada
-            targetSection.classList.remove('d-none');
+            const targetSection = link.getAttribute("href").substring(1);
+            showSection(targetSection);
+            history.pushState(null, null, `#${targetSection}`);
         });
     });
+
+    // Manejar cambios en el hash
+    window.addEventListener("hashchange", loadSectionFromHash);
+
+    // Inicializa la sección correcta
+    loadSectionFromHash();
 });
+
 
 document.getElementById("logo-link").addEventListener("click", function(event) {
     event.preventDefault(); // Prevenir la acción por defecto del enlace
