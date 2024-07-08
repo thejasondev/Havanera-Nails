@@ -44,7 +44,7 @@ document.getElementById("logo-link").addEventListener("click", function(event) {
 
 //Botón 'Ver más' de la sección de Inicio.
 document.getElementById('ver-mas-btn').addEventListener('click', function() {
-    var extraText = document.getElementById('extra-text');
+    const extraText = document.getElementById('extra-text');
     if (extraText.style.display === 'none') {
         extraText.style.display = 'block';
         this.textContent = 'Ver menos';
