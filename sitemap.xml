@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://thejasondev.github.io/Havanera-Nails/</loc>
+    <lastmod>2024-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://thejasondev.github.io/Havanera-Nails/#inicio.html</loc>
+    <lastmod>2024-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thejasondev.github.io/Havanera-Nails/#productos.html</loc>
+    <lastmod>2024-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thejasondev.github.io/Havanera-Nails/#contacto.html</loc>
+    <lastmod>2024-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thejasondev.github.io/Havanera-Nails/#galeria.html</loc>
+    <lastmod>2024-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thejasondev.github.io/Havanera-Nails/#precios.html</loc>
+    <lastmod>2024-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Agrega más URLs según sea necesario -->
+</urlset>
