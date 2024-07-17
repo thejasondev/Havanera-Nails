@@ -159,26 +159,28 @@
             </div>
         </div>
         <div class="gallery">
-            <div class="gallery-item"><img src="images/Arreglos/arreglo1.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo2.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo3.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo4.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo5.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo6.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo7.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo8.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo9.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo10.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo11.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo12.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo13.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo14.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
-            <div class="gallery-item"><img src="images/Arreglos/arreglo15.webp" alt="Nail Art" onclick="openLightbox(this)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo1.webp" alt="Nail Art" onclick="openLightbox(this,0)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo2.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo3.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo4.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo5.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo6.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo7.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo8.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo9.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo10.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo11.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo12.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo13.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo14.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/Arreglos/arreglo15.webp" alt="Nail Art" onclick="openLightbox(this,1)" loading="lazy"></div>
           </div>
           
-          <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-            <span class="close">&times;</span>
+          <div id="lightbox" class="lightbox">
+            <span class="close" onclick="closeLightbox()">&times;</span>
             <img class="lightbox-content" id="lightbox-img">
+            <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+            <a class="next" onclick="changeImage(1)">&#10095;</a>
           </div>
     </section>
 

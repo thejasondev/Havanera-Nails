@@ -36,13 +36,30 @@ document.getElementById('ver-mas-btn').addEventListener('click', function() {
  });
 
 //Galería lightbox!
-function openLightbox(img) {
+let currentIndex = 0;
+
+function openLightbox(img, index) {
+    currentIndex = index;
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     lightboxImg.src = img.src;
     lightbox.style.display = 'flex';
-  }
-  
-  function closeLightbox() {
+}
+
+function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
-  }
+}
+
+function changeImage(direction) {
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    currentIndex += direction;
+
+    if (currentIndex < 0) {
+        currentIndex = galleryItems.length - 1;
+    } else if (currentIndex >= galleryItems.length) {
+        currentIndex = 0;
+    }
+
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = galleryItems[currentIndex].src;
+}

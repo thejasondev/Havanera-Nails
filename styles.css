@@ -333,6 +333,44 @@ li:last-child {
     cursor: pointer;
   }
 
+  /* Flechas de navegación */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.3s ease;
+    user-select: none;
+  }
+  
+  .prev {
+    left: 10px;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .next {
+    right: 10px;
+    border-radius: 0 3px 3px 0;
+  }
+  
+  .prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+/* Las flechas estén bien posicionadas en dispositivos móviles */
+@media (max-width: 768px) {
+    .prev, .next {
+      font-size: 16px;
+      padding: 12px;
+    }
+  }
+  
+
   /* Contacto */
   #contacto {
     text-align: center;
