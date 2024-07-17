@@ -21,17 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Lógica para el botón "Ver más"
-    const verMasBtn = document.getElementById('ver-mas-btn');
-    if (verMasBtn) {
-        verMasBtn.addEventListener('click', function() {
-            const extraText = document.getElementById('extra-text');
-            if (extraText) {
-                extraText.style.display = extraText.style.display === 'none' ? 'block' : 'none';
-            }
-        });
+//Botón 'Ver más' de la sección de Inicio.
+document.getElementById('ver-mas-btn').addEventListener('click', function() {
+    const extraText = document.getElementById('extra-text');
+    if (extraText.style.display === 'none') {
+        extraText.style.display = 'block';
+        this.textContent = 'Ver menos';
+    } else {
+        extraText.style.display = 'none';
+        this.textContent = 'Ver más';
     }
-});
+            
+    });
+ });
 
 //Galería lightbox!
 function openLightbox(img) {
