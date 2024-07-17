@@ -63,3 +63,28 @@ function changeImage(direction) {
     const lightboxImg = document.getElementById('lightbox-img');
     lightboxImg.src = galleryItems[currentIndex].src;
 }
+
+if ('IntersectionObserver' in window) {
+    const lazyImages = document.querySelectorAll('.lazyload');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.getAttribute('data-src');
+                img.classList.remove('lazyload');
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    lazyImages.forEach(img => {
+        imageObserver.observe(img);
+    });
+} else {
+    // Fallback for browsers that don't support IntersectionObserver
+    const lazyImages = document.querySelectorAll('.lazyload');
+    lazyImages.forEach(img => {
+        img.src = img.getAttribute('data-src');
+        img.classList.remove('lazyload');
+    });
+}
