@@ -26,10 +26,10 @@ document.getElementById('ver-mas-btn').addEventListener('click', function() {
     const extraText = document.getElementById('extra-text');
     if (extraText.style.display === 'none') {
         extraText.style.display = 'block';
-        this.textContent = 'Ver menos';
+        this.textContent = 'Vísitenos!';
     } else {
         extraText.style.display = 'none';
-        this.textContent = 'Ver más';
+        this.textContent = 'Dónde nos encontramos?';
     }
             
     });
