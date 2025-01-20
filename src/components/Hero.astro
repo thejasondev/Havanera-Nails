@@ -1,27 +1,30 @@
 <section class="relative h-screen bg-pink-50 flex flex-col justify-center items-center overflow-hidden">
   <!-- Fondo SVG -->
   <div class="absolute inset-0 flex justify-center items-end pointer-events-none">
-    <img src="/images/pomo-derramando.svg" alt="Decoración pomo" class="w-11/12 md:w-3/4 lg:w-2/3 opacity-90">
+    <img src="/bg-top/bg__top.png" alt="Decoración pomo" class="w-full md:w-3/4 lg:w-2/3 opacity-90 object-cover">
   </div>
 
   <!-- Contenido principal -->
-  <div class="relative z-10 flex flex-col items-center text-center space-y-4">
-    <h1 class="text-6xl md:text-8xl font-bold text-pink-600 leading-tight">
+  <div class="relative z-10 flex flex-col items-center text-center space-y-4 px-4">
+    <h1 class="text-4xl md:text-6xl lg:text-8xl font-bold text-pink-600 leading-tight">
       Havanera Nails
     </h1>
-    <p class="text-2xl md:text-3xl font-light text-pink-500">
+    <p class="text-lg md:text-2xl lg:text-3xl font-light text-pink-500">
       Salón
     </p>
+    <button class="mt-4 px-6 py-3 bg-pink-600 text-white rounded-lg shadow-lg hover:bg-pink-500 transition duration-300">
+      Reserva Ahora
+    </button>
   </div>
 
   <!-- Navegación izquierda -->
-  <nav class="absolute top-0 left-0 flex flex-col space-y-4 p-6 text-pink-600 text-lg font-medium">
+  <nav class="absolute top-0 left-0 flex flex-col space-y-2 p-4 md:space-y-4 md:p-6 text-pink-600 text-sm md:text-lg font-medium">
     <a href="#reservar" class="hover:text-pink-500">Reservar ahora</a>
     <a href="#catalogo" class="hover:text-pink-500">Catálogo</a>
   </nav>
 
   <!-- Navegación derecha -->
-  <nav class="absolute top-0 right-0 flex flex-col space-y-4 p-6 text-pink-600 text-lg font-medium">
+  <nav class="absolute top-0 right-0 flex flex-col space-y-2 p-4 md:space-y-4 md:p-6 text-pink-600 text-sm md:text-lg font-medium">
     <a href="#servicio" class="hover:text-pink-500">Servicio</a>
     <a href="#contacto" class="hover:text-pink-500">Contacto</a>
   </nav>

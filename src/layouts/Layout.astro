@@ -1,9 +1,16 @@
+---
+import '../styles/global.css';
+
+const { title, description } = Astro.props;
+---
+
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8">
+	<meta name="description" content={description}>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Havanera Nails</title>
+    <title>{title}</title>
     <link rel="icon" href="/favicon.ico">
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap"
@@ -13,13 +20,12 @@
   <body class="antialiased">
     <slot />
   </body>
-	  <style>
+</html>
+	  <style is:global>
       body {
         font-family: 'Roboto', sans-serif;
-        background-color: #FDF2F2;
       }
       h1, h2 {
         font-family: 'Playfair Display', serif;
       }
     </style>
-</html>
