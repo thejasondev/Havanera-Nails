@@ -1,22 +1,25 @@
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Havanera Nails</title>
+    <link rel="icon" href="/favicon.ico">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    >
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+	  <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #FDF2F2;
+      }
+      h1, h2 {
+        font-family: 'Playfair Display', serif;
+      }
+    </style>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
