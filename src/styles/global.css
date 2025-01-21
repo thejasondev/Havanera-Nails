@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Ocultar el SVG grande en pantallas pequeñas y mostrar el SVG pequeño */
 .small-svg {
   display: none;
