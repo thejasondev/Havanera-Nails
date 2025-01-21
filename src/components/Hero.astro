@@ -1,7 +1,12 @@
 <section class="relative h-screen bg-white flex flex-col justify-center items-center overflow-hidden">
-  <!-- Fondo SVG -->
-  <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
-    <img src="/bg-top/bg__top.png" alt="Decoración pomo" class="svg-background transform transition-transform duration-500 ease-in-out">
+   <!-- Fondo SVG para pantallas grandes -->
+  <div class="absolute inset-0 flex justify-center items-center pointer-events-none large-svg">
+    <img src="/bg-top/bg__top.png" alt="Decoración pomo" class="w-full h-full object-cover opacity-70 transform transition-transform duration-500 ease-in-out">
+  </div>
+
+  <!-- Fondo SVG para pantallas pequeñas -->
+  <div class="absolute inset-0 flex justify-center items-center pointer-events-none small-svg">
+    <img src="/bg-top/bg-top-sm.png" alt="Decoración pomo pequeño" class="w-full h-full object-cover opacity-70 transform transition-transform duration-500 ease-in-out">
   </div>
 
   <!-- Contenido principal -->
