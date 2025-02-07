@@ -1,7 +1,7 @@
 <header id="header" class="fixed left-0 top-0 w-full z-50 bg-transparent transition-all duration-300">
   <div class="container mx-auto z-10 flex flex-col text-center inset-x-0 top-0">
     <a href="/">
-      <h1 class="text-3xl md:text-4xl font-bold text-pink-500 leading-tight lg:mr-0 mt-6 mb-2 mr-12">
+      <h1 class="text-3xl md:text-4xl font-bold text-pink-500 leading-tight lg:mr-0 mt-6 mb-2 mr-6">
         Havanera<br>Nails
       </h1>
     </a>
@@ -22,7 +22,7 @@
 
     <!-- Menú hamburguesa (móviles) -->
     <div class="absolute">
-      <button id="menu-toggle" class="fixed focus:outline-none p-2 rounded-md m-8 z-50">
+      <button id="menu-toggle" class="fixed focus:outline-none p-2 rounded-md ml-5 mt-8 z-50">
         <!-- ícono menú al abrir -->
         <svg id="menu-icon-open" class="md:hidden block w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -36,17 +36,17 @@
   </div>
       <!-- Menú desplegable para móviles -->
       <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-cover bg-center bg-no-repeat shadow-md" style="background-image: url('/bg-top/pink-bg.webp');">
-        <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight mt-6 mb-4">
+        <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight mt-6 mb-4 mr-6">
          Havanera<br>Nails
         </h1>
-        <ul class="items-center h-full space-y-6 mt-24 text-lg font-semibold text-white">
+        <ul class="items-center h-full space-y-6 mt-36 text-lg font-semibold text-white">
           <li class="flex-col"><a href="/" class="hover:text-pink-500 transition">Inicio</a></li>
           <li class="flex-col"><a href="/Catalogo_section" class="hover:text-pink-500 transition">Catálogo</a></li>
           <li class="flex-col"><a href="/Servicio_section" class="hover:text-pink-500 transition">Servicios</a></li>
           <li class="flex-col"><a href="/FAQ_section" class="hover:text-pink-500 transition">FAQ</a></li>
           
           <!-- Iconos sociales --> 
-          <div class="flex flex-row justify-center space-x-8  pt-16">  
+          <div class="flex flex-row justify-center space-x-8  pt-24">  
           <li>
           <a href="https://facebook.com" target="_blank" class="text-white hover:text-pink-500 transition">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
@@ -71,7 +71,7 @@
       </div> 
 
    <!-- Reservar botón separado (móviles) --> 
-    <div class="absolute top-10 right-10 md:hidden">
+    <div class="absolute top-10 right-5 md:hidden">
       <a href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" target="_blank" rel="noopener noreferrer" class="text-white bg-pink-500 rounded-lg p-2 text-lg font-medium">Agendar</a>
     </div>
 </header>
