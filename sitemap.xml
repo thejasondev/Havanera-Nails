@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tusitioweb.com/</loc>
+    <loc>https://havanera-nails.vercel.app/</loc>
     <lastmod>2025-02-07</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://tusitioweb.com/catalogo</loc>
+    <loc>https://havanera-nails.vercel.app/Catalogo_section</loc>
     <lastmod>2025-02-07</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tusitioweb.com/reserva</loc>
+    <loc>https://havanera-nails.vercel.app/Servicio_section</loc>
     <lastmod>2025-02-07</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tusitioweb.com/servicio</loc>
-    <lastmod>2025-02-07</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tusitioweb.com/contacto</loc>
+    <loc>https://https://havanera-nails.vercel.app/FAQ_section</loc>
     <lastmod>2025-02-07</lastmod>
     <priority>0.8</priority>
   </url>
