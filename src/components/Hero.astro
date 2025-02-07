@@ -1,49 +1,32 @@
-<section class="relative h-screen bg-white flex flex-col justify-center items-center overflow-hidden">
+<section class="relative min-h-screen bg-white flex flex-col justify-center items-center overflow-hidden">
    <!-- Fondo SVG para pantallas grandes -->
-  <div class="absolute inset-0 flex justify-center items-center pointer-events-none large-svg">
-    <img src="/bg-top/bg__top.png" alt="Decoración pomo" class="w-full h-full object-cover opacity-70 transform transition-transform duration-500 ease-in-out">
+  <div class="inset-0 flex justify-center items-center pointer-events-none large-svg">
+    <img src="/bg-top/bg__top.webp" alt="Decoración pomo" class="w-full h-full object-cover opacity-100 transform transition-transform duration-500 ease-in-out">
   </div>
 
   <!-- Fondo SVG para pantallas pequeñas -->
-  <div class="absolute inset-0 flex justify-center items-center pointer-events-none small-svg">
-    <img src="/bg-top/bg-top-sm.png" alt="Decoración pomo pequeño" class="w-full h-full object-cover opacity-70 transform transition-transform duration-500 ease-in-out">
+  <div class="inset-0 flex justify-center items-center pointer-events-none small-svg">
+    <img src="/bg-top/bg-top-sm.webp" alt="Decoración pomo pequeño" class="w-full h-full object-cover bg-opacity-10 transform transition-transform duration-500 ease-in-out">
   </div>
-
-  <!-- Contenido principal -->
-  <div class="absolute z-10 flex flex-col text-center top-0 m-6 p-4">
-    <h1 class="text-4xl md:text-4xl lg:text-4xl font-bold text-pink-500 leading-tight">
-      Havanera
-      <br>
-      Nails
-    </h1>
-  </div>
-
-  <!-- Navegación izquierda -->
-  <ul class="absolute top-0 m-6 p-8 text-black left-10 lg:space-x-40 md:space-y-4 md:p-6 md:text-lg font-normal">
-    <a href="#reservar" class="hover:text-pink-500">Reservar</a>
-    <a href="#catalogo" class="hover:text-pink-500">Catálogo</a>
-  </ul>
-
-  <!-- Navegación derecha -->
-  <ul class="absolute top-0 m-6 p-8 text-black right-10 lg:space-x-40 md:space-y-4 md:p-6 md:text-lg font-normal">
-    <a href="#servicio" class="hover:text-pink-500">Servicios</a>
-    <a href="#contacto" class="hover:text-pink-500">Contacto</a>
-  </ul>
 
   <!-- Sobre mi -->
-    <div class="absolute z-10 flex flex-col text-center m-6 left-10 space-y-2 p-4 md:space-y-4 md:p-6">
-        <h2 class="text-pink-500 font-bold text-xl">Bienvenidos a Havanera Nails</h2>
+    <div class="absolute z-10 flex flex-col text-center lg:left-10 m-0 left-50 top-60 space-y-2 p-4 md:space-y-4 md:p-6">
+        <h2 class="text-pink-500 font-bold text-2xl">Bienvenidos a Havanera Nails</h2>
         <p class="items-start md:text-xl lg:text-2xl font-light text-black"></p>
-        Tu lugar para el cuidado y belleza de tus uñas.
+        El lugar ideal para el cuidado y belleza de tus uñas.
         <br>
         En Miramar, La Habana.
         </p>
-        <a 
-        href="https://wa.me/+5355118387?text=Hola,%20deseo%20solicitar%20tus%20servicios." 
-        class="flex items-center justify-center bg-pink-500 text-white px-6 py-3 rounded-lg shadow-md mt-4"
+      <nav class="pt-3">
+      <a 
+        href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" 
+        class="items-center justify-center bg-pink-500 text-white py-3 px-6  rounded-lg shadow-md"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Reservar ahora
-      </a>
+        Agendar ahora
+       </a>
+    </nav> 
+    </div>
+    
 </section>

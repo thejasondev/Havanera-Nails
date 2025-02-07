@@ -1,0 +1,175 @@
+---
+import Layout from "../layouts/Layout.astro"
+
+const images = [
+  { src: "/arreglos/arreglo1.webp", alt: "Trabajo 1" },
+  { src: "/arreglos/arreglo2.webp", alt: "Trabajo 2" },
+  { src: "/arreglos/arreglo3.webp", alt: "Trabajo 3" },
+  { src: "/arreglos/arreglo4.webp", alt: "Trabajo 4" },
+  { src: "/arreglos/arreglo5.webp", alt: "Trabajo 5" },
+  { src: "/arreglos/arreglo6.webp", alt: "Trabajo 6" },
+  { src: "/arreglos/arreglo7.webp", alt: "Trabajo 7" },
+  { src: "/arreglos/arreglo8.webp", alt: "Trabajo 8" },
+  { src: "/arreglos/arreglo9.webp", alt: "Trabajo 9" },
+  { src: "/arreglos/arreglo10.webp", alt: "Trabajo 10" },
+  { src: "/arreglos/arreglo11.webp", alt: "Trabajo 11" },
+  { src: "/arreglos/arreglo12.webp", alt: "Trabajo 12" },
+  { src: "/arreglos/arreglo13.webp", alt: "Trabajo 13" },
+  { src: "/arreglos/arreglo14.webp", alt: "Trabajo 14" },
+  { src: "/arreglos/arreglo15.webp", alt: "Trabajo 15" },
+  { src: "/arreglos/arreglo16.webp", alt: "Trabajo 16" },
+  { src: "/arreglos/arreglo17.webp", alt: "Trabajo 17" },
+  { src: "/arreglos/arreglo18.webp", alt: "Trabajo 18" },
+  { src: "/arreglos/arreglo19.webp", alt: "Trabajo 19" },
+  { src: "/arreglos/arreglo20.webp", alt: "Trabajo 20" },
+  { src: "/arreglos/arreglo21.webp", alt: "Trabajo 21" },
+];
+
+---
+<Layout>
+  <main class="pt-32">
+    <!-- Sección del catálogo -->
+    <section id="catalogo-completo" class="pt-16">
+      <!-- Banner superior con fondo -->
+      <div 
+        class="w-full h-52 md:h-96 lg:h-[500px] bg-cover bg-top bg-no-repeat"
+        style="background-image: url('/bg-top/bg-catalogo.webp');"
+      >
+        <div class="flex items-center justify-center h-full">
+          <h2 class="text-4xl md:text-6xl font-bold text-white">Catálogo de Arreglos</h2>
+        </div>
+      </div>
+
+      <!-- Galería de imágenes en grid -->
+      <div class="grid grid-cols-3 gap-4 p-4">
+        {images.map((image, index) => (
+          <img 
+            src={image.src} 
+            alt={image.alt} 
+            loading="lazy"
+            data-index={index}
+            class="w-full h-60 md:h-96 lg:h-[500px] object-cover shadow-lg cursor-pointer transition-transform duration-200 hover:scale-105"
+          />
+        ))}
+      </div>
+    </section>
+
+    <!-- Modal Lightbox (inicialmente oculto) -->
+    <div 
+      id="modal" 
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-80"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Visualización de imagen"
+    >
+      <div class="absolute max-w-full max-h-full">
+        <!-- Botón para cerrar -->
+        <button 
+          id="modalClose" 
+          aria-label="Cerrar" 
+          class="absolute top-2 right-2 text-white text-6xl z-10 hover:text-pink-500"
+        >
+          &times;
+        </button>
+        <!-- Botón de navegación anterior -->
+        <button 
+          id="modalPrev" 
+          aria-label="Imagen anterior" 
+          class="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-4xl z-10 hover:text-pink-500"
+        >
+          &#8249;
+        </button>
+        <!-- Botón de navegación siguiente -->
+        <button 
+          id="modalNext" 
+          aria-label="Siguiente imagen" 
+          class="absolute right-2 top-1/2 transform -translate-y-1/2 text-white text-4xl z-10 hover:text-pink-500"
+        >
+          &#8250;
+        </button>
+        <!-- Imagen a mostrar en el modal -->
+        <img 
+          id="modalImage" 
+          class="max-h-screen max-w-screen-sm object-cover items-center justify-center" 
+          src="" 
+          alt=""
+        />
+      </div>
+    </div>
+  </main>
+
+  <!-- Script para el comportamiento del Lightbox -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Seleccionamos las imágenes de la galería y elementos del modal
+      const galleryImages = document.querySelectorAll('#catalogo-completo img');
+      const modal = document.getElementById('modal');
+      const modalImage = document.getElementById('modalImage');
+      const closeBtn = document.getElementById('modalClose');
+      const prevBtn = document.getElementById('modalPrev');
+      const nextBtn = document.getElementById('modalNext');
+      let currentIndex = 0;
+
+      // Función para abrir el modal con la imagen seleccionada
+      function openModal(index) {
+        currentIndex = index;
+        const selectedImage = galleryImages[currentIndex];
+        modalImage.src = selectedImage.src;
+        modalImage.alt = selectedImage.alt;
+        modal.classList.remove('hidden');
+      }
+
+      // Función para cerrar el modal
+      function closeModal() {
+        modal.classList.add('hidden');
+      }
+
+      // Función para mostrar la imagen anterior
+      function showPrev() {
+        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        openModal(currentIndex);
+      }
+
+      // Función para mostrar la siguiente imagen
+      function showNext() {
+        currentIndex = (currentIndex + 1) % galleryImages.length;
+        openModal(currentIndex);
+      }
+
+      // Asignamos el evento de click a cada imagen de la galería
+      galleryImages.forEach((img, index) => {
+        img.addEventListener('click', () => openModal(index));
+      });
+
+      // Eventos para los botones del modal
+      closeBtn.addEventListener('click', closeModal);
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showPrev();
+      });
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showNext();
+      });
+
+      // Cierra el modal si se hace click fuera del contenedor de la imagen
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Navegación por teclado: Esc para cerrar, flechas para navegar
+      document.addEventListener('keydown', (e) => {
+        if (modal.classList.contains('hidden')) return;
+        if (e.key === 'Escape') {
+          closeModal();
+        } else if (e.key === 'ArrowLeft') {
+          showPrev();
+        } else if (e.key === 'ArrowRight') {
+          showNext();
+        }
+      });
+    });
+  </script>
+</Layout>

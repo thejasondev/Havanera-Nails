@@ -20,28 +20,3 @@
     display: none;
   }
 }
-
-/* Estilos adicionales si es necesario */
-.svg-background {
-  transform: rotate(0deg);
-}
-
-@media (max-width: 480px) {
-  .svg-background {
-    transform: rotate(45deg) translateY(-20%);}
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-  .svg-background {
-    transform: rotate(30deg) translateY(-15%);}
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .svg-background {
-    transform: rotate(15deg) translateY(-10%);}
-}
-
-@media (min-width: 1025px) {
-  .svg-background {
-    transform: rotate(0deg);}
-}

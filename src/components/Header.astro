@@ -1,0 +1,84 @@
+<header id="header" class="fixed left-0 top-0 w-full z-50 bg-transparent transition-all duration-300">
+  <div class="container mx-auto z-10 flex flex-col text-center inset-x-0 top-0">
+    <a href="/">
+      <h1 class="text-3xl md:text-4xl font-bold text-pink-500 leading-tight lg:mr-0 mt-6 mb-2 mr-12">
+        Havanera<br>Nails
+      </h1>
+    </a>
+
+    <!-- Navegación izquierda (escritorio) -->
+    <ul class="hidden md:flex absolute top-8 left-20 text-black space-x-32 text-lg font-normal">
+      <li><a href="https://wa.me/+5355118387?text=Hola,%20deseo%20solicitar%20tus%20servicios."
+        target="_blank"
+        rel="noopener noreferrer" class="hover:text-pink-500">Agendar</a></li>
+      <li><a href="/Catalogo_section" class="hover:text-pink-500">Catálogo</a></li>
+    </ul>
+
+    <!-- Navegación derecha (escritorio) -->
+    <ul class="hidden md:flex absolute top-8 right-20 text-black space-x-32 text-lg font-normal">
+      <li><a href="/Servicio_section" class="hover:text-pink-500">Servicios</a></li>
+      <li><a href="#contacto" class="hover:text-pink-500">Contacto</a></li>
+    </ul>
+
+    <!-- Menú hamburguesa (móviles) -->
+    <div class="absolute">
+      <button id="menu-toggle" class="fixed focus:outline-none p-2 rounded-md m-8 z-50">
+        <!-- ícono menú al abrir -->
+        <svg id="menu-icon-open" class="md:hidden block w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+
+        <!-- Ícono cerrar -->
+        <svg id="menu-icon-close" class="hidden w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+  </div>
+      <!-- Menú desplegable para móviles -->
+      <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-cover bg-center bg-no-repeat shadow-md" style="background-image: url('/bg-top/pink-bg.webp');">
+        <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight mt-6 mb-4">
+         Havanera<br>Nails
+        </h1>
+        <ul class="items-center h-full space-y-6 mt-24 text-lg font-semibold text-white">
+          <li class="flex-col"><a href="/" class="hover:text-pink-500 transition">Inicio</a></li>
+          <li class="flex-col"><a href="/Catalogo_section" class="hover:text-pink-500 transition">Catálogo</a></li>
+          <li class="flex-col"><a href="/Servicio_section" class="hover:text-pink-500 transition">Servicios</a></li>
+          <li class="flex-col"><a href="/FAQ_section" class="hover:text-pink-500 transition">FAQ</a></li>
+          
+          <!-- Iconos sociales --> 
+          <div class="flex flex-row justify-center space-x-8  pt-16">  
+          <li>
+          <a href="https://facebook.com" target="_blank" class="text-white hover:text-pink-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 2h3a1 1 0 011 1v3a1 1 0 01-1 1h-3v4h3a1 1 0 011 1v3a1 1 0 01-1 1h-3v7a1 1 0 01-1 1h-3a1 1 0 01-1-1v-7h-3a1 1 0 01-1-1v-3a1 1 0 011-1h3V7a5 5 0 015-5z" />
+            </svg>
+          </a>
+          </li>
+          <li>
+          <a href="https://www.instagram.com/havanera_nails_" target="_blank" class="text-white hover:text-pink-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37a4 4 0 11-8 0 4 4 0 018 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.5 6.5h.01" />
+            </svg>
+          </a>
+          </li>
+          </div>
+        <div class="text-center text-sm text-white">
+        © {new Date().getFullYear()}  Havanera Nails. Todos los derechos reservados.
+        </div>
+        </ul>
+      </div> 
+
+   <!-- Reservar botón separado (móviles) --> 
+    <div class="absolute top-10 right-10 md:hidden">
+      <a href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" target="_blank" rel="noopener noreferrer" class="text-white bg-pink-500 rounded-lg p-2 text-lg font-medium">Agendar</a>
+    </div>
+</header>
+
+<script
+src="/src/scripts/menu-toggle.js">
+</script>
+<script
+src="/src/scripts/scrollHeader.js">
+</script>
