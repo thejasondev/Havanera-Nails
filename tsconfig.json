@@ -1,5 +1,23 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@pages/*": ["src/pages/*"],
+      "@scripts/*": ["src/scripts/*"],
+      "@styles/*": ["src/styles/*"],
+      "@assets/*": ["src/assets/*"]
+    },
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "allowJs": true,
+    "checkJs": true,
+    "isolatedModules": true,
+    "esModuleInterop": true
+  },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "exclude": ["dist", "node_modules"]
 }

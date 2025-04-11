@@ -2,31 +2,51 @@
 import Layout from "../layouts/Layout.astro"
 
 const images = [
-  { src: "/arreglos/arreglo1.webp", alt: "Trabajo 1" },
-  { src: "/arreglos/arreglo2.webp", alt: "Trabajo 2" },
-  { src: "/arreglos/arreglo3.webp", alt: "Trabajo 3" },
-  { src: "/arreglos/arreglo4.webp", alt: "Trabajo 4" },
-  { src: "/arreglos/arreglo5.webp", alt: "Trabajo 5" },
-  { src: "/arreglos/arreglo6.webp", alt: "Trabajo 6" },
-  { src: "/arreglos/arreglo7.webp", alt: "Trabajo 7" },
-  { src: "/arreglos/arreglo8.webp", alt: "Trabajo 8" },
-  { src: "/arreglos/arreglo9.webp", alt: "Trabajo 9" },
-  { src: "/arreglos/arreglo10.webp", alt: "Trabajo 10" },
-  { src: "/arreglos/arreglo11.webp", alt: "Trabajo 11" },
-  { src: "/arreglos/arreglo12.webp", alt: "Trabajo 12" },
-  { src: "/arreglos/arreglo13.webp", alt: "Trabajo 13" },
-  { src: "/arreglos/arreglo14.webp", alt: "Trabajo 14" },
-  { src: "/arreglos/arreglo15.webp", alt: "Trabajo 15" },
-  { src: "/arreglos/arreglo16.webp", alt: "Trabajo 16" },
-  { src: "/arreglos/arreglo17.webp", alt: "Trabajo 17" },
-  { src: "/arreglos/arreglo18.webp", alt: "Trabajo 18" },
-  { src: "/arreglos/arreglo19.webp", alt: "Trabajo 19" },
-  { src: "/arreglos/arreglo20.webp", alt: "Trabajo 20" },
-  { src: "/arreglos/arreglo21.webp", alt: "Trabajo 21" },
+  { src: "/arreglos/arreglo1.webp", alt: "Diseño de uñas con glitter y decoración floral" },
+  { src: "/arreglos/arreglo2.webp", alt: "Manicura francesa con detalles elegantes" },
+  { src: "/arreglos/arreglo3.webp", alt: "Uñas con diseño geométrico y acabado brillante" },
+  { src: "/arreglos/arreglo4.webp", alt: "Nail art con decoración de pedrería" },
+  { src: "/arreglos/arreglo5.webp", alt: "Diseño minimalista con detalles metálicos" },
+  { src: "/arreglos/arreglo6.webp", alt: "Uñas decoradas con efecto degradado" },
+  { src: "/arreglos/arreglo7.webp", alt: "Manicura rubber base con decoración" },
+  { src: "/arreglos/arreglo8.webp", alt: "Diseño creativo con líneas y puntos" },
+  { src: "/arreglos/arreglo9.webp", alt: "Uñas con acabado mate y detalles brillantes" },
+  { src: "/arreglos/arreglo10.webp", alt: "Manicura con diseño floral detallado" },
+  { src: "/arreglos/arreglo11.webp", alt: "Uñas estilo ombré con decoración" },
+  { src: "/arreglos/arreglo12.webp", alt: "Diseño elegante con tonos pasteles" },
+  { src: "/arreglos/arreglo13.webp", alt: "Manicura con efecto espejo y pedrería" },
+  { src: "/arreglos/arreglo14.webp", alt: "Nail art con efecto mármol y detalles dorados" },
+  { src: "/arreglos/arreglo15.webp", alt: "Diseño tropical con colores vibrantes" },
+  { src: "/arreglos/arreglo16.webp", alt: "Uñas con aplicaciones decorativas" },
+  { src: "/arreglos/arreglo17.webp", alt: "Manicura con diseño abstracto y brillo" },
+  { src: "/arreglos/arreglo18.webp", alt: "Diseño temático con decoración especial" },
+  { src: "/arreglos/arreglo19.webp", alt: "Uñas con efecto texturizado y pedrería" },
+  { src: "/arreglos/arreglo20.webp", alt: "Manicura elegante para eventos especiales" },
+  { src: "/arreglos/arreglo21.webp", alt: "Diseño exclusivo con detallado artístico" },
 ];
 
+// Datos estructurados para la galería
+const gallerySchema = {
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "headline": "Catálogo de Diseños de Uñas",
+  "description": "Galería de diseños profesionales de uñas realizados en Havanera Nails, incluyendo manicuras con gel, rubber base y nail art exclusivo.",
+  "image": images.slice(0, 5).map(img => `https://havanera-nails.vercel.app${img.src}`),
+  "provider": {
+    "@type": "NailSalon",
+    "name": "Havanera Nails",
+    "sameAs": "https://havanera-nails.vercel.app"
+  }
+};
 ---
-<Layout>
+
+<Layout
+  title="Catálogo de Diseños de Uñas | Havanera Nails"
+  description="Explora nuestro catálogo de diseños profesionales de uñas. Manicuras con gel, rubber base y nail art exclusivo en Miramar, La Habana."
+  canonicalURL={new URL("/Catalogo_section", Astro.site)}
+  type="article"
+  image="/arreglos/arreglo1.webp"
+>
   <main class="pt-32">
     <!-- Sección del catálogo -->
     <section id="catalogo-completo" class="pt-16">
@@ -36,8 +56,17 @@ const images = [
         style="background-image: url('/bg-top/bg-catalogo.webp');"
       >
         <div class="flex items-center justify-center h-full">
-          <h2 class="text-3xl lg:mb-0 mb-10 md:text-6xl font-bold text-white">Catálogo de Arreglos</h2>
+          <h1 class="text-3xl lg:mb-0 mb-10 md:text-6xl font-bold text-white">Catálogo de Arreglos</h1>
         </div>
+      </div>
+
+      <!-- Introducción a la galería con texto optimizado para SEO -->
+      <div class="container mx-auto px-4 py-8">
+        <p class="text-lg text-center mb-8">
+          Explora nuestra galería de diseños exclusivos realizados en <strong>Havanera Nails</strong>. 
+          Desde elegantes manicuras con <em>rubber base</em> hasta elaborados diseños con <em>gel</em> 
+          y decoraciones únicas. Cada trabajo refleja nuestra dedicación a la excelencia y atención al detalle.
+        </p>
       </div>
 
       <!-- Galería de imágenes en grid -->
@@ -99,4 +128,6 @@ const images = [
   </main>
 </Layout>
 
-<script src="/src/scripts/ligthbox.js"></script>
+<!-- Datos estructurados para la galería -->
+<script type="application/ld+json" set:html={JSON.stringify(gallerySchema)} />
+<script src="/src/scripts/lightbox.ts"></script>

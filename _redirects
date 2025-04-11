@@ -1,0 +1,18 @@
+# Redirección para URLs sin barra final
+/Catalogo_section   /Catalogo_section/   301
+/Servicio_section   /Servicio_section/   301
+/FAQ_section        /FAQ_section/        301
+
+# Redirección del dominio www al dominio sin www (si aplica)
+https://www.havanera-nails.vercel.app/*  https://havanera-nails.vercel.app/:splat  301!
+
+# Redirección de páginas antiguas o URLs con errores comunes (ejemplos)
+/catalog            /Catalogo_section/   301
+/catalogo           /Catalogo_section/   301
+/servicios          /Servicio_section/   301
+/precios            /Servicio_section/   301
+/faq                /FAQ_section/        301
+/contacto           /#contacto           301
+
+# Error 404 personalizado
+/*  /404.html  404 

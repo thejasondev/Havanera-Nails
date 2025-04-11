@@ -1,32 +1,49 @@
-<section class="relative min-h-screen bg-white flex flex-col justify-center items-center overflow-hidden">
+<section 
+  class="relative min-h-screen bg-white flex flex-col justify-center items-center overflow-hidden"
+  aria-label="Bienvenida a Havanera Nails"
+>
    <!-- Fondo SVG para pantallas grandes -->
   <div class="inset-0 flex justify-center items-center pointer-events-none large-svg">
-    <img src="/bg-top/bg__top.webp" alt="Decoración pomo" class="w-full h-full object-cover opacity-100 transform transition-transform duration-500 ease-in-out">
+    <img 
+      src="/bg-top/bg__top.webp" 
+      alt="Fondo decorativo con diseño de uñas" 
+      class="w-full h-full object-cover opacity-100 transform transition-transform duration-500 ease-in-out"
+      width="1920"
+      height="1080"
+      loading="eager"
+    >
   </div>
 
   <!-- Fondo SVG para pantallas pequeñas -->
   <div class="inset-0 flex justify-center items-center pointer-events-none small-svg">
-    <img src="/bg-top/bg-top-sm.webp" alt="Decoración pomo pequeño" class="top-0 w-full h-full object-cover bg-opacity-10 transform transition-transform duration-500 ease-in-out">
+    <img 
+      src="/bg-top/bg-top-sm.webp" 
+      alt="Fondo decorativo para móviles" 
+      class="top-0 w-full h-full object-cover bg-opacity-10 transform transition-transform duration-500 ease-in-out"
+      width="640"
+      height="960"
+      loading="eager"
+    >
   </div>
 
-  <!-- Sobre mi -->
-    <div class="absolute z-10 flex flex-col text-center lg:left-10 m-0 left-50 top-60 space-y-2 p-4 md:space-y-4 md:p-6">
-        <h2 class="text-pink-500 font-bold text-2xl">Bienvenidos a Havanera Nails</h2>
-        <p class="items-start md:text-xl lg:text-2xl font-light text-black"></p>
-        El lugar ideal para el cuidado y belleza de tus uñas.
-        <br>
-        En Miramar, La Habana.
-        </p>
-      <nav class="pt-3">
+  <!-- Información principal -->
+  <div class="absolute z-10 flex flex-col text-center lg:left-10 m-0 left-50 top-60 space-y-2 p-4 md:space-y-4 md:p-6">
+    <h1 class="text-pink-500 font-bold text-3xl md:text-4xl">Bienvenidos a Havanera Nails</h1>
+    <p class="items-start md:text-xl lg:text-2xl font-light text-black">
+      El lugar ideal para el cuidado y belleza de tus uñas.
+      <br>
+      En <strong>Miramar, La Habana</strong>.
+    </p>
+    <nav class="pt-3">
       <a 
         href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" 
-        class="items-center justify-center bg-pink-500 text-white py-3 px-6  rounded-lg shadow-md"
+        class="items-center justify-center bg-pink-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-pink-600 transition-colors duration-300"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Agendar cita por WhatsApp"
       >
         Agendar ahora
-       </a>
+      </a>
     </nav> 
-    </div>
-    
+  </div>
 </section>

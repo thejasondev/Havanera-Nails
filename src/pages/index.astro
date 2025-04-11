@@ -8,11 +8,17 @@ import Contacto from '../components/Contacto.astro';
 ---
 
 <Layout
-  title="Havanera Nails | Servicio Profesional de Uñas en Miramar, La Habana."
-  description="Havanera Nails | Servicio Profesional de Uñas en Miramar, La Habana | Productos y servicios, Galería y Catálogo de precios.">
-	<Hero />
-	<Catalogo />
-	<Reserva />
-	<Servicio />
-	<Contacto />
+  title="Havanera Nails | Servicio Profesional de Uñas en Miramar, La Habana"
+  description="Havanera Nails ofrece servicios profesionales de manicura y pedicura con gel y rubber base. Atención personalizada y diseños exclusivos en Miramar, La Habana."
+  canonicalURL={new URL("/", Astro.site)}
+  type="website"
+  image="/bg-top/servicio1.webp"
+>
+  <main>
+    <Hero />
+    <Catalogo />
+    <Reserva />
+    <Servicio />
+    <Contacto />
+  </main>
 </Layout>

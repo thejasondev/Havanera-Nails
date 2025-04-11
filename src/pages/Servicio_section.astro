@@ -1,12 +1,67 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+// Datos estructurados para los servicios
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "NailSalon",
+  "name": "Havanera Nails",
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Manicura Rubber Base",
+        "description": "Tratamiento con geles especiales que proporcionan una textura suave y un aspecto delicado, ideal para un look natural y sofisticado.",
+        "price": "600",
+        "priceCurrency": "CUP"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Pedicura Rubber Base",
+        "description": "Tratamiento para pies que ofrece un acabado ligero y flexible, incluyendo exfoliación, nutrición y revitalización de la piel.",
+        "price": "600",
+        "priceCurrency": "CUP"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Manicura con Gel",
+        "description": "Tratamiento duradero con acabado profesional que resiste el paso del tiempo, fortaleciendo las uñas naturales.",
+        "price": "400",
+        "priceCurrency": "CUP"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Pedicura con Gel",
+        "description": "Servicio que embellece las uñas de los pies con un tratamiento relajante para hidratar y suavizar la piel.",
+        "price": "400",
+        "priceCurrency": "CUP"
+      }
+    }
+  ]
+};
 ---
 
-<Layout>
+<Layout 
+  title="Servicios y Precios | Havanera Nails" 
+  description="Conoce nuestros servicios profesionales de manicura y pedicura con gel y rubber base. Precios accesibles y atención personalizada en Miramar, La Habana."
+  canonicalURL={new URL("/Servicio_section", Astro.site)}
+  type="article"
+  image="/svg/pintura.svg"
+>
  <main class="pt-32">
- <section id="catalogo-completo" class="bg-white text-black py-16">
+ <section id="servicios" class="bg-white text-black py-16">
     <div class="container bg-pink-500">
-     <h2 class=" flex items-center justify-center text-4xl lg:text-6xl font-bold pt-8 lg:mb-4 mb-6 text-white underline">Servicios y precios</h2>
+     <h1 class="flex items-center justify-center text-4xl lg:text-6xl font-bold pt-8 lg:mb-4 mb-6 text-white underline">Servicios y precios</h1>
      <ul class="grid grid-cols-1 text-center text-white text-lg font-normal lg:pt-8 lg:text-3xl space-y-4 pb-8">
      <a href="#manicurarubber" class="lg:mb-0 hover:bg-pink-400">Manicura Rubber Base</a>
      <a href="#pedicurarubber" class="lg:mb-0 hover:bg-pink-400">Pedicura Rubber Base</a>
@@ -14,17 +69,27 @@ import Layout from "../layouts/Layout.astro";
      <a href="#pedicuragel" class="hover:bg-pink-400">Pedicura con Gel</a>
      </ul>  
     </div>
+    
+    <!-- Introducción a los servicios -->
+    <div class="container mx-auto px-6 py-8 text-center">
+      <p class="text-lg mb-8">
+        En <strong>Havanera Nails</strong> ofrecemos servicios profesionales de manicura y pedicura 
+        con los mejores productos y técnicas. Nuestro compromiso es brindar resultados excepcionales 
+        y una experiencia agradable para cada cliente.
+      </p>
+    </div>
+    
     <div class="container mx-auto px-6 text-center justify-center">
     <!-- Servicio 1 -->
-    <div id="manicurarubber" class="pb-8 pt-16">
+    <div id="manicurarubber" class="pb-8 pt-8">
       <h2 class="text-3xl font-bold mb-1 text-pink-500">Manicura Rubber Base</h2>
       <p class="text-lg md:text-xl lg:text-2xl font-semibold text-pink-500 mb-1 underline">Precio: 600 cup</p>
       <div class="grid grid-cols-5 gap-0 mb-1 pl-4 lg:pl-28 bg-pink-100 rounded-full">
-      <img src="/svg/alicate.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/lima.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/pintura.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/lámpara.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/manos_listas.svg" alt="Servicio 1" class="w-auto h-auto">
+      <img src="/svg/alicate.svg" alt="Alicate para manicura" class="w-auto h-auto">
+      <img src="/svg/lima.svg" alt="Lima de uñas" class="w-auto h-auto">
+      <img src="/svg/pintura.svg" alt="Esmalte de uñas" class="w-auto h-auto">
+      <img src="/svg/lámpara.svg" alt="Lámpara UV para uñas" class="w-auto h-auto">
+      <img src="/svg/manos_listas.svg" alt="Manos con manicura terminada" class="w-auto h-auto">
       </div>
       <p>
         Si buscas un acabado más natural y flexible, nuestra <span class="text-pink-500 font-semibold">manicura con rubber</span> es la elección perfecta. Este innovador tratamiento utiliza geles especiales que proporcionan una textura suave y un aspecto delicado, ideal para quienes prefieren un look sutil pero sofisticado. Además, el gel rubber es conocido por su adherencia excepcional y resistencia al astillamiento, lo que garantiza una manicura duradera y cómoda. Nos adaptaremos a tu diseño ideal, asegurándonos de que tus uñas luzcan siempre frescas y bien cuidadas.
@@ -36,11 +101,11 @@ import Layout from "../layouts/Layout.astro";
       <h2 class="text-3xl font-bold mb-1 text-pink-500">Pedicura Rubber Base</h2>
       <p class="text-lg md:text-xl lg:text-2xl font-semibold text-pink-500 mb-1 underline">Precio: 600 cup.</p>
       <div class="grid grid-cols-5 gap-0 mb-1 pl-4 lg:pl-28 bg-pink-100 rounded-full">
-      <img src="/svg/alicate.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/guayo.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/pintura.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/lámpara.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/pies.svg" alt="Servicio 1" class="w-auto h-auto">
+      <img src="/svg/alicate.svg" alt="Alicate para pedicura" class="w-auto h-auto">
+      <img src="/svg/guayo.svg" alt="Guayo exfoliante para pies" class="w-auto h-auto">
+      <img src="/svg/pintura.svg" alt="Esmalte para uñas de pies" class="w-auto h-auto">
+      <img src="/svg/lámpara.svg" alt="Lámpara UV para secado" class="w-auto h-auto">
+      <img src="/svg/pies.svg" alt="Pies con pedicura terminada" class="w-auto h-auto">
       </div>
       <p>
         Nuestra <span class="text-pink-500 font-semibold">pedicura con rubber</span>, diseñada para quienes valoran la naturalidad y la comodidad. Este tratamiento ofrece un acabado ligero y flexible que realza la belleza de tus pies sin sacrificar la durabilidad. Además, incluimos un cuidado integral que exfolia, nutre y revitaliza tu piel, dejándola suave y sedosa. Con nuestra pedicura en rubber, tus pies no solo se verán increíbles, sino que también se sentirán renovados y relajados. Déjate consentir con un servicio que combina estética y bienestar para un resultado verdaderamente excepcional
@@ -51,11 +116,11 @@ import Layout from "../layouts/Layout.astro";
       <h2 class="text-3xl font-bold mb-1 text-pink-500">Manicura con Gel</h2>
       <p class="text-lg md:text-xl lg:text-2xl font-semibold text-pink-500 mb-1 underline">Precio: 400 cup</p>
       <div class="grid grid-cols-5 gap-0 mb-1 pl-4 lg:pl-28 bg-pink-100 rounded-full">
-      <img src="/svg/alicate.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/lima.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/pintura.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/lámpara.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/manos_listas.svg" alt="Servicio 1" class="w-auto h-auto">
+      <img src="/svg/alicate.svg" alt="Alicate para manicura gel" class="w-auto h-auto">
+      <img src="/svg/lima.svg" alt="Lima para preparación de uñas" class="w-auto h-auto">
+      <img src="/svg/pintura.svg" alt="Gel para uñas" class="w-auto h-auto">
+      <img src="/svg/lámpara.svg" alt="Lámpara de secado UV" class="w-auto h-auto">
+      <img src="/svg/manos_listas.svg" alt="Resultado final de manicura gel" class="w-auto h-auto">
       </div>
       <p>
         Nuestra <span class="text-pink-500 font-semibold">manicura con gel</span> es el tratamiento ideal para quienes buscan durabilidad y un acabado profesional que resista el paso del tiempo. Utilizamos productos de alta calidad que garantizan una aplicación uniforme, colores vibrantes y un brillo espectacular que no se astilla. Ya sea que prefieras un estilo clásico, tonos llamativos o diseños personalizados, te ofrecemos resultados impecables que complementarán tu estilo de vida. Además, este tratamiento fortalece tus uñas naturales, promoviendo su salud mientras lucen perfectas por semanas.
@@ -66,11 +131,11 @@ import Layout from "../layouts/Layout.astro";
       <h2 class="text-3xl font-bold mb-1 text-pink-500">Pedicura con Gel</h2>
       <h4 class="text-lg md:text-xl lg:text-2xl font-semibold text-pink-500 mb-1 underline">Precio: 400 cup.</h4>
       <div class="grid grid-cols-5 gap-0 mb-1 pl-4 lg:pl-28 bg-pink-100 rounded-full">
-      <img src="/svg/alicate.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/guayo.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/pintura.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/lámpara.svg" alt="Servicio 1" class="w-auto h-auto">
-      <img src="/svg/pies.svg" alt="Servicio 1" class="w-auto h-auto">
+      <img src="/svg/alicate.svg" alt="Alicate para pedicura gel" class="w-auto h-auto">
+      <img src="/svg/guayo.svg" alt="Exfoliante para pies" class="w-auto h-auto">
+      <img src="/svg/pintura.svg" alt="Gel para uñas de pies" class="w-auto h-auto">
+      <img src="/svg/lámpara.svg" alt="Lámpara UV para pedicura" class="w-auto h-auto">
+      <img src="/svg/pies.svg" alt="Pies con pedicura gel terminada" class="w-auto h-auto">
       </div>
       <p>
         Dale a tus pies el cuidado que merecen con nuestra exclusiva <span class="text-pink-500 font-semibold">pedicura con gel</span>. Este servicio no solo embellece tus uñas, sino que también incluye un tratamiento relajante para hidratar y suavizar tu piel, dejando tus pies renovados y listos para cualquier ocasión. El esmaltado en gel asegura un acabado duradero y resistente, perfecto para quienes desean mantener sus pies impecables sin preocupaciones.
@@ -79,3 +144,6 @@ import Layout from "../layouts/Layout.astro";
  </section>
 </main>
 </Layout>
+
+<!-- Datos estructurados para los servicios -->
+<script type="application/ld+json" set:html={JSON.stringify(servicesSchema)} />

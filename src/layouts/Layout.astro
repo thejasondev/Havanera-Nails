@@ -2,49 +2,122 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-const { title, description } = Astro.props;
+const { 
+  title = "Havanera Nails | Servicio Profesional de Uñas en Miramar, La Habana",
+  description = "Havanera Nails ofrece servicios profesionales de manicura y pedicura con gel y rubber base en Miramar, La Habana. Diseños personalizados y atención de calidad.",
+  image = "/logo.png",
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  type = "website"
+} = Astro.props;
+
+// Datos estructurados para el negocio local
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": "NailSalon",
+  "name": "Havanera Nails",
+  "image": "https://havanera-nails.vercel.app/logo.png",
+  "url": "https://havanera-nails.vercel.app",
+  "telephone": "+5355118387",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Miramar",
+    "addressLocality": "La Habana",
+    "addressRegion": "La Habana",
+    "addressCountry": "CU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "23.1136",
+    "longitude": "-82.3666"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  ],
+  "priceRange": "$$",
+  "sameAs": [
+    "https://www.instagram.com/havanera_nails_",
+    "https://facebook.com/havanera.nails"
+  ]
+};
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
+    <!-- Metadatos básicos -->
     <meta charset="UTF-8">
-	  <meta name="description" content={description}>
-    <meta name="keywords" content="Havanera Nails, uñas, manicure, pedicure, Miramar, La Habana">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content={description}>
+    <meta name="keywords" content="Havanera Nails, uñas, manicure, pedicure, gel, rubber base, Miramar, La Habana, salon de uñas, nail salon, diseño de uñas">
+    <meta name="author" content="Havanera Nails">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Títulos y enlaces canónicos -->
     <title>{title}</title>
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Favicon -->
     <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon/favicon-32x32.png" type="image/png">
     <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+    
+    <!-- Manifest para PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ec4899">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Havanera Nails">
+    
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Satisfy&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type}>
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://https://havanera-nails.vercel.app">
-    <meta property="og:image" content="https://havanera-nails.vercel.app/logo.png">
+    <meta property="og:url" content={canonicalURL}>
+    <meta property="og:image" content={new URL(image, Astro.site)}>
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Havanera Nails">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content={title}>
+    <meta property="twitter:description" content={description}>
+    <meta property="twitter:image" content={new URL(image, Astro.site)}>
+    
+    <!-- Verificación del sitio -->
     <meta name="google-site-verification" content="A7BT_C6ClgkaWHA9brgG3v0v7gG-1NeclQ6jCfvQF8U" />
+    
+    <!-- Datos estructurados JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
   </head>
   <body class="antialiased">
-	<Header />
-	<slot />
-	<Footer />
+    <Header />
+    <slot />
+    <Footer />
   </body>
 </html>
-	  <style is:global>
-	  html{
-		scroll-behavior: smooth;
-	  }
-      body {
-        font-family: 'Raleway', sans-serif;
-      }
-      h1, h2 {
-        font-family: 'Satisfy', serif;
-      }
-	  @media (prefers-reduced-motion: reduce) {
-        html {
-            scroll-behavior: auto;
-        }
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Raleway', sans-serif;
+  }
+  h1, h2 {
+    font-family: 'Satisfy', serif;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
     }
-    </style>
+  }
+</style>
