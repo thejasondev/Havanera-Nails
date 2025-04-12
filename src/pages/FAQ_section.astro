@@ -1,43 +1,193 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+// Array de preguntas frecuentes para un mejor manejo de datos
+const faqs = [
+  {
+    question: "¿Necesito una cita para realizarme un servicio?",
+    answer: "Sí, es fundamental realizar una reserva previa para garantizar la disponibilidad y ofrecerte la mejor atención personalizada. Puedes agendar tu cita a través de nuestro WhatsApp."
+  },
+  {
+    question: "¿Qué métodos de pago aceptan?",
+    answer: "Aceptamos pagos en efectivo, en monedas como USD, EURO y CUP, así como transferencias electrónicas en CUP. Consulta con nosotros por opciones adicionales al momento de tu visita."
+  },
+  {
+    question: "¿Qué pasa si llego tarde a mi cita?",
+    answer: "Ofrecemos un período de gracia de 20 minutos. Si llegas tarde, haremos nuestro mejor esfuerzo para atenderte, pero la duración del servicio podría reducirse para no afectar a otros clientes programados después de ti."
+  },
+  {
+    question: "¿Utilizan productos libres de químicos agresivos?",
+    answer: "Sí, trabajamos con marcas reconocidas que garantizan productos libres de químicos dañinos para garantizar la salud de tus uñas. La calidad y seguridad de nuestros productos es una prioridad."
+  },
+  {
+    question: "¿Ofrecen servicios personalizados o diseños especiales?",
+    answer: "¡Claro que sí! Estamos capacitados para ofrecer diseños personalizados y adaptarnos a tus preferencias. Puedes traer imágenes de referencia o consultar nuestro catálogo de diseños exclusivos."
+  },
+  {
+    question: "¿Cuánto tiempo dura el servicio de manicura?",
+    answer: "El tiempo aproximado para una manicura completa es de 45 a 60 minutos, dependiendo del tipo de servicio y diseño elegido. Para pedicuras, considera entre 60 y 75 minutos."
+  },
+  {
+    question: "¿Cuánto tiempo duran los acabados de gel y rubber base?",
+    answer: "Los servicios con gel suelen durar hasta 2-3 semanas, mientras que los trabajos con rubber base pueden durar hasta 3-4 semanas con el cuidado adecuado."
+  }
+];
 ---
 
-<Layout>
- <section id="faq" class="pt-16 pb-4 bg-gray-50">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center text-pink-500 mt-32 mb-8">Preguntas Frecuentes</h2>
-    <div class="space-y-8">
-
-      <!-- Pregunta 1 -->
-      <details class="bg-white shadow-md p-6 rounded-lg">
-        <summary class="font-semibold text-lg cursor-pointer text-pink-500">¿Necesito una cita para realizarme un servicio?</summary>
-        <p class="mt-4 text-gray-600">SI, es fundamental realizar una reserva previa para garantizar la disponibilidad.</p>
-      </details>
-
-      <!-- Pregunta 2 -->
-      <details class="bg-white shadow-md p-6 rounded-lg">
-        <summary class="font-semibold text-lg cursor-pointer text-pink-500">¿Qué métodos de pago aceptan?</summary>
-        <p class="mt-4 text-gray-600">Aceptamos pagos en efectivo, en monedas como USD, EURO y CUP, así como transferencias electrónicas en CUP.</p>
-      </details>
-
-      <!-- Pregunta 3 -->
-      <details class="bg-white shadow-md p-6 rounded-lg">
-        <summary class="font-semibold text-lg cursor-pointer text-pink-500">¿Qué pasa si llego tarde a mi cita?</summary>
-        <p class="mt-4 text-gray-600">Ofrecemos un período de gracia de 20 minutos. Si llega tarde, haremos nuestro mejor esfuerzo para atenderle, pero la duración del servicio podría reducirse para no afectar a otros clientes.</p>
-      </details>
-
-      <!-- Pregunta 4 -->
-      <details class="bg-white shadow-md p-6 rounded-lg">
-        <summary class="font-semibold text-lg cursor-pointer text-pink-500">¿Utilizan productos libres de químicos agresivos?</summary>
-        <p class="mt-4 text-gray-600">Sí, trabajamos con marcas reconocidas que garantizan productos libres de químicos dañinos para garantizar la salud de sus uñas.</p>
-      </details>
-
-      <!-- Pregunta 5 -->
-      <details class="bg-white shadow-md p-6 rounded-lg">
-        <summary class="font-semibold text-lg cursor-pointer text-pink-500">¿Ofrecen servicios personalizados o diseños especiales?</summary>
-        <p class="mt-4 text-gray-600">¡Claro que sí! Estamos capacitados para ofrecer diseños personalizados y adaptarse a sus preferencias.</p>
-      </details>
-    </div>
-  </div>
-</section>
+<Layout
+  title="Preguntas Frecuentes | Havanera Nails" 
+  description="Encuentra respuestas a las preguntas más comunes sobre nuestros servicios de manicura y pedicura. Información sobre reservas, productos y atención en Havanera Nails."
+  canonicalURL={new URL("/FAQ_section", Astro.site)}
+  type="article"
+  image="/svg/pintura.svg"
+>
+  <main>
+    <!-- Hero sección FAQ con fondo y overlay -->
+    <section 
+      class="relative flex items-center justify-center h-[40vh] md:h-[50vh] bg-cover bg-center overflow-hidden"
+      aria-label="Banner principal de preguntas frecuentes"
+    >
+      <!-- Fondo con overlay degradado -->
+      <div class="absolute inset-0 z-0 bg-gradient-to-b from-pink-300 to-pink-500"></div>
+      
+      <!-- Patrón decorativo -->
+      <div class="absolute inset-0 bg-pattern-dots opacity-10 z-0 pointer-events-none"></div>
+      
+      <!-- Elementos decorativos -->
+      <div class="absolute -top-16 -left-16 w-64 h-64 bg-pink-200 rounded-full opacity-30 blur-3xl"></div>
+      <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-pink-200 rounded-full opacity-30 blur-3xl"></div>
+      
+      <!-- Contenido del hero -->
+      <div class="relative z-10 text-center px-4 mt-20">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-satisfy text-white mb-4 drop-shadow-lg">
+          Preguntas Frecuentes
+        </h1>
+        <p class="text-lg md:text-xl text-white max-w-2xl mx-auto drop-shadow-md">
+          Todo lo que necesitas saber sobre nuestros servicios
+        </p>
+      </div>
+    </section>
+    
+    <!-- Sección principal de FAQs -->
+    <section class="py-16 bg-gradient-to-b from-white via-pink-50/30 to-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <!-- Introducción -->
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-satisfy text-pink-500 mb-6">Respuestas a tus dudas</h2>
+          <p class="text-lg text-gray-700">
+            Hemos recopilado las preguntas más comunes para brindarte toda la información que 
+            necesitas antes de visitarnos. Si tienes alguna duda adicional, no dudes en 
+            <a href="#contacto" class="text-pink-500 hover:underline">contactarnos</a>.
+          </p>
+          
+          <!-- Línea decorativa -->
+          <div class="flex justify-center mt-8">
+            <div class="w-24 h-1 bg-gradient-to-r from-pink-300 to-pink-500 rounded-full"></div>
+          </div>
+        </div>
+        
+        <!-- Acordeón de preguntas frecuentes -->
+        <div class="space-y-6 mt-12">
+          {faqs.map((faq, index) => (
+            <div class="faq-item relative">
+              <!-- Marco decorativo con degradado (solo visible al estar activo) -->
+              <div class="absolute -inset-1 bg-gradient-to-r from-pink-200 via-pink-300 to-pink-200 rounded-xl opacity-0 blur-sm transition-opacity duration-300 faq-glow"></div>
+              
+              <details class="bg-white shadow-md rounded-xl overflow-hidden relative z-10 border border-pink-100 group">
+                <summary class="p-6 flex justify-between items-center cursor-pointer">
+                  <h3 class="font-medium text-lg text-gray-800 group-hover:text-pink-500 transition-colors duration-300">{faq.question}</h3>
+                  <!-- Icono personalizado con animación -->
+                  <div class="flex-shrink-0 ml-4 bg-pink-100 rounded-full w-8 h-8 flex items-center justify-center transform transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-6 pt-0 bg-white">
+                  <p class="text-gray-700">{faq.answer}</p>
+                </div>
+              </details>
+            </div>
+          ))}
+        </div>
+        
+        <!-- Sección adicional - Aún tienes dudas -->
+        <div class="bg-white rounded-2xl shadow-xl mt-16 overflow-hidden">
+          <div class="p-8 md:p-12 relative">
+            <!-- Elementos decorativos -->
+            <div class="absolute -top-20 -right-20 w-48 h-48 bg-pink-100 rounded-full opacity-50"></div>
+            <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-pink-100 rounded-full opacity-50"></div>
+            
+            <div class="relative z-10">
+              <div class="md:flex items-center justify-between">
+                <div class="mb-6 md:mb-0 md:mr-8">
+                  <h3 class="text-2xl md:text-3xl font-satisfy text-pink-500 mb-4">¿Aún tienes dudas?</h3>
+                  <p class="text-gray-700">
+                    No te preocupes, estamos aquí para ayudarte. Puedes contactarnos directamente 
+                    y resolveremos todas tus preguntas sobre nuestros servicios.
+                  </p>
+                </div>
+                
+                <div class="flex-shrink-0">
+                  <a 
+                    href="https://wa.me/+5355118387?text=Hola,%20tengo%20una%20pregunta%20sobre%20sus%20servicios.%20¿Podrían%20ayudarme?" 
+                    class="inline-flex items-center px-6 py-4 bg-gradient-to-r from-pink-500 to-pink-400 text-white font-medium rounded-full shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Contáctanos por WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  /* Estilo para el efecto de brillo al abrir el acordeón */
+  details[open] + .faq-glow,
+  details:hover + .faq-glow,
+  .faq-item:hover .faq-glow {
+    opacity: 0.6;
+  }
+  
+  /* Estilos para los elementos details/summary */
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  /* Patrón de puntos para el fondo */
+  .bg-pattern-dots {
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+</style>
+
+<script>
+  // Script para manejar la animación de las preguntas
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const details = item.querySelector('details');
+      const glow = item.querySelector('.faq-glow');
+      
+      if (details && glow) {
+        details.addEventListener('toggle', () => {
+          if (details.open) {
+            glow.classList.add('opacity-60');
+          } else {
+            glow.classList.remove('opacity-60');
+          }
+        });
+      }
+    });
+  });
+</script>

@@ -2,17 +2,177 @@
 <section id="catalogo" class="pt-32 pb-16 text-center">
   <div class="container mx-auto px-4">
     <h2 class="text-4xl font-bold text-pink-500 mb-6">Nuestro Catálogo</h2>
-    <p class="text-gray-700 mb-8">Descubre algunos de nuestros mejores trabajos. ¡Encuentra el diseño perfecto para ti!</p>
+    <p class="text-gray-700 mb-12">Descubre algunos de nuestros mejores trabajos. ¡Encuentra el diseño perfecto para ti!</p>
     
-    <!-- Galería de imágenes -->
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:gap-4">
-      <img src="/bg-top/catalogo3.webp" alt="Diseño de uñas 3" class="w-full object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300 hidden md:block">
-      <img src="/bg-top/catalogo1.webp" alt="Diseño de uñas 1" class="w-full md:mt-24 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
-      <img src="/bg-top/catalogo2.webp" alt="Diseño de uñas 2" class="w-full object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300 hidden md:block">
+    <!-- Contenedor para galería y botón - VERSIÓN DESKTOP -->
+    <div class="relative hidden md:block">
+      <!-- Marco decorativo -->
+      <div class="absolute -inset-2 bg-gradient-to-r from-pink-200 via-pink-400 to-pink-200 rounded-xl opacity-70 blur-lg"></div>
+      
+      <!-- Galería de imágenes con disposición mejorada -->
+      <div class="relative grid grid-cols-3 gap-5 p-3 bg-white rounded-lg">
+        <div class="overflow-hidden rounded-lg transform -translate-y-4 shadow-lg hover:shadow-xl transition-all duration-300">
+          <img 
+            src="/bg-top/catalogo3.webp" 
+            alt="Diseño de uñas con acabado elegante" 
+            class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500 ease-in-out"
+          />
+        </div>
+        
+        <div class="overflow-hidden rounded-lg transform translate-y-6 shadow-lg hover:shadow-xl transition-all duration-300">
+          <img 
+            src="/bg-top/catalogo1.webp" 
+            alt="Manicura con diseño exclusivo" 
+            class="w-full h-96 object-cover transform hover:scale-105 transition-transform duration-500 ease-in-out"
+          />
+        </div>
+        
+        <div class="overflow-hidden rounded-lg transform -translate-y-4 shadow-lg hover:shadow-xl transition-all duration-300">
+          <img 
+            src="/bg-top/catalogo2.webp" 
+            alt="Uñas con decoración artística" 
+            class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500 ease-in-out"
+          />
+        </div>
+      </div>
+      
+      <!-- Botón flotante para ver más (desktop) -->
+      <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-10">
+        <a 
+          href="/Catalogo_section" 
+          class="inline-block bg-gradient-to-r from-pink-500 to-pink-400 text-white py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 font-medium text-lg"
+        >
+          <span class="flex items-center">
+            Catálogo completo
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </span>
+        </a>
+      </div>
     </div>
-    <!-- Botón para ver más -->
-    <div class="lg:mt-0 mt-8">
-      <a href="/Catalogo_section" class="bg-pink-500 text-white py-3 px-6 rounded-lg shadow-lg">Catálogo completo</a>
+
+    <!-- VERSIÓN TABLET (solo visible en tablets) -->
+    <div class="hidden sm:block md:hidden">
+      <div class="relative mx-auto max-w-md">
+        <!-- Marco decorativo para tablet -->
+        <div class="absolute -inset-3 bg-gradient-to-r from-pink-200 via-pink-400 to-pink-200 rounded-xl opacity-70 blur-lg"></div>
+        
+        <!-- Carrusel para tablet -->
+        <div class="relative p-3 bg-white rounded-lg">
+          <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+            <img 
+              src="/bg-top/catalogo1.webp" 
+              alt="Manicura con diseño exclusivo" 
+              class="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500 ease-in-out"
+            />
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+              <p class="text-white text-lg font-medium">Diseños exclusivos</p>
+            </div>
+          </div>
+          
+          <!-- Indicadores de carrusel -->
+          <div class="flex justify-center mt-4 space-x-2">
+            <span class="w-3 h-3 bg-pink-500 rounded-full"></span>
+            <span class="w-3 h-3 bg-pink-300 rounded-full"></span>
+            <span class="w-3 h-3 bg-pink-300 rounded-full"></span>
+          </div>
+        </div>
+        
+        <!-- Botón flotante para tablet -->
+        <div class="mt-8">
+          <a 
+            href="/Catalogo_section" 
+            class="inline-block bg-gradient-to-r from-pink-500 to-pink-400 text-white py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 font-medium"
+          >
+            <span class="flex items-center">
+              Ver el catálogo
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSIÓN MÓVIL (solo visible en dispositivos pequeños) -->
+    <div class="sm:hidden">
+      <!-- Diseño de tarjeta moderna para móvil -->
+      <div class="mx-auto max-w-xs">
+        <!-- Tarjeta principal con bordes redondeados y sombra -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-pink-200">
+          <!-- Encabezado colorido -->
+          <div class="bg-gradient-to-r from-pink-400 to-pink-500 p-4 text-white">
+            <h3 class="text-xl font-bold">Diseños Exclusivos</h3>
+            <p class="text-white/90 text-sm mt-1">Encuentra inspiración para tu próximo look</p>
+          </div>
+          
+          <!-- Imagen principal con overlay protector para garantizar legibilidad -->
+          <div class="relative">
+            <img 
+              src="/bg-top/catalogo1.webp" 
+              alt="Diseño de uñas destacado" 
+              class="w-full h-64 object-cover"
+            />
+            <!-- Etiqueta flotante sobre la imagen -->
+            <div class="absolute top-3 right-3 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+              Destacado
+            </div>
+          </div>
+          
+          <!-- Galería de miniaturas con etiquetas -->
+          <div class="p-4 grid grid-cols-2 gap-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-lg h-24 shadow-sm border border-pink-100">
+                <img src="/bg-top/catalogo2.webp" alt="Diseño minimalista" class="w-full h-full object-cover" />
+              </div>
+              <p class="text-xs font-medium text-pink-700">Estilo minimalista</p>
+            </div>
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-lg h-24 shadow-sm border border-pink-100">
+                <img src="/bg-top/catalogo3.webp" alt="Diseño elegante" class="w-full h-full object-cover" />
+              </div>
+              <p class="text-xs font-medium text-pink-700">Elegancia clásica</p>
+            </div>
+          </div>
+          
+          <!-- Texto informativo -->
+          <div class="px-4 py-2">
+            <p class="text-sm text-gray-600">Explora nuestra colección completa de diseños y encuentra el estilo perfecto para cualquier ocasión.</p>
+          </div>
+          
+          <!-- Botón para móvil con gradiente y sombra pronunciada -->
+          <div class="p-4 pt-0">
+            <a 
+              href="/Catalogo_section" 
+              class="block w-full bg-gradient-to-r from-pink-500 to-pink-400 text-white py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 font-medium text-center relative overflow-hidden"
+            >
+              <!-- Efecto de brillo en el botón -->
+              <span class="absolute inset-0 overflow-hidden">
+                <span class="absolute -rotate-45 w-12 h-24 left-0 top-0 transform -translate-x-10 bg-white/20 blur-sm animate-shine"></span>
+              </span>
+              
+              <span class="relative flex items-center justify-center">
+                Ver catálogo completo
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Indicador de deslizar para más -->
+        <div class="mt-4 flex items-center justify-center">
+          <span class="text-xs text-gray-500 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            Desliza para ver más
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -1,8 +1,216 @@
-<section class="relative flex justify-center items-center mt-10">
-  <div class="inset-0 flex justify-center items-center mb-12">
-        <img src="/bg-top/footer-bg.webp" alt="Decoración" class="lg:min-h-72 min-h-52 opacity-100 lg:min-w-full object-cover transform transition-transform duration-500 ease-in-out">
-    <div class="absolute z-10 flex text-center md:space-y-4 md:p-6">
-      <h2 class="lg:text-3xl text-lg font-semibold text-pink-500">"Calidad, estilo y cuidado personalizado. ¡Agenda tu cita hoy!" </h2>
+<section id="reserva" class="py-16 md:py-24">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold mb-4 text-pink-500 text-center">Reserva tu Cita</h2>
+    <p class="mb-12 text-lg md:text-xl lg:text-2xl font-light text-center">Calidad, estilo y atención personalizada para tus uñas</p>
+    
+    <!-- VERSIÓN DESKTOP (lg y superior) -->
+    <div class="hidden lg:block relative">
+      <!-- Marco decorativo -->
+      <div class="absolute -inset-4 bg-gradient-to-br from-pink-200 to-pink-300 rounded-xl opacity-60 blur-lg"></div>
+      
+      <!-- Contenido principal -->
+      <div class="relative rounded-xl overflow-hidden shadow-lg">
+        <!-- Imagen de fondo con overlay -->
+        <div class="relative h-80">
+          <img 
+            src="/bg-top/footer-bg.webp" 
+            alt="Espacio de trabajo de manicura" 
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-pink-500/70 to-transparent flex items-center">
+            <div class="w-1/2 p-10">
+              <h3 class="text-white text-3xl font-bold mb-4">¿Lista para lucir uñas perfectas?</h3>
+              <p class="text-white/90 text-lg mb-6">
+                Agenda tu cita hoy y déjanos crear el diseño perfecto para ti. Nuestro equipo profesional te espera.
+              </p>
+              <a 
+                href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-6 py-3 bg-white text-pink-500 font-medium rounded-full shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Agendar cita por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Características adicionales -->
+        <div class="bg-white p-6">
+          <div class="grid grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="bg-pink-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 class="font-medium text-pink-700">Horario Flexible</h4>
+              <p class="text-sm text-gray-600 mt-1">Adaptado a tu disponibilidad</p>
+            </div>
+            <div class="text-center">
+              <div class="bg-pink-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <h4 class="font-medium text-pink-700">Atención VIP</h4>
+              <p class="text-sm text-gray-600 mt-1">Experiencia personalizada</p>
+            </div>
+            <div class="text-center">
+              <div class="bg-pink-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h4 class="font-medium text-pink-700">Productos Seguros</h4>
+              <p class="text-sm text-gray-600 mt-1">Materiales de calidad</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- VERSIÓN TABLET (md pero no lg) -->
+    <div class="hidden md:block lg:hidden">
+      <div class="relative mx-auto">
+        <!-- Marco decorativo -->
+        <div class="absolute -inset-3 bg-gradient-to-r from-pink-200 via-pink-300 to-pink-200 rounded-xl opacity-60 blur-lg"></div>
+        
+        <!-- Contenido principal -->
+        <div class="relative rounded-lg overflow-hidden shadow-lg">
+          <!-- Imagen con overlay -->
+          <div class="relative h-64">
+            <img 
+              src="/bg-top/footer-bg.webp" 
+              alt="Espacio de manicura profesional" 
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-r from-pink-500/80 to-transparent flex items-center">
+              <div class="w-2/3 p-6">
+                <h3 class="text-white text-2xl font-bold mb-3">Agenda tu cita hoy</h3>
+                <p class="text-white/90 mb-4">
+                  Reserva tu espacio y disfruta de una experiencia premium para tus uñas.
+                </p>
+                <a 
+                  href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center px-5 py-2 bg-white text-pink-500 font-medium rounded-full shadow-lg transform transition-all duration-300 hover:shadow-xl"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                  Agendar por WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ventajas -->
+          <div class="bg-white p-4">
+            <div class="grid grid-cols-3 gap-3">
+              <div class="bg-pink-50 p-3 rounded-lg text-center">
+                <div class="text-pink-500 text-xl mb-1">✧</div>
+                <p class="text-xs font-medium text-pink-700">Horario Flexible</p>
+              </div>
+              <div class="bg-pink-50 p-3 rounded-lg text-center">
+                <div class="text-pink-500 text-xl mb-1">✧</div>
+                <p class="text-xs font-medium text-pink-700">Atención VIP</p>
+              </div>
+              <div class="bg-pink-50 p-3 rounded-lg text-center">
+                <div class="text-pink-500 text-xl mb-1">✧</div>
+                <p class="text-xs font-medium text-pink-700">Materiales Premium</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- VERSIÓN MÓVIL (solo sm) -->
+    <div class="md:hidden">
+      <!-- Tarjeta moderna para móvil -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-pink-100 mx-auto max-w-xs">
+        <!-- Imagen con cita inspiradora -->
+        <div class="relative">
+          <img 
+            src="/bg-top/footer-bg.webp" 
+            alt="Espacio de manicura" 
+            class="w-full h-48 object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/40 to-pink-500/90 flex flex-col justify-end p-4">
+            <h3 class="text-white text-xl font-bold text-center">
+              "Calidad, estilo y cuidado personalizado"
+            </h3>
+          </div>
+        </div>
+        
+        <!-- Contenido -->
+        <div class="p-4">
+          <p class="text-center text-gray-600 mb-4">
+            Agenda tu cita hoy y transforma tus uñas con nuestros diseños exclusivos y atención profesional.
+          </p>
+          
+          <!-- Ventajas en móvil -->
+          <div class="grid grid-cols-2 gap-2 mb-5">
+            <div class="flex items-center">
+              <div class="bg-pink-100 text-pink-500 p-1 rounded-full mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-xs text-gray-700">Horario Flexible</span>
+            </div>
+            <div class="flex items-center">
+              <div class="bg-pink-100 text-pink-500 p-1 rounded-full mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-xs text-gray-700">Atención VIP</span>
+            </div>
+            <div class="flex items-center">
+              <div class="bg-pink-100 text-pink-500 p-1 rounded-full mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-xs text-gray-700">Materiales Premium</span>
+            </div>
+            <div class="flex items-center">
+              <div class="bg-pink-100 text-pink-500 p-1 rounded-full mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-xs text-gray-700">Diseños Exclusivos</span>
+            </div>
+          </div>
+          
+          <!-- Botón para móvil -->
+          <a 
+            href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-gradient-to-r from-pink-500 to-pink-400 text-white py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 font-medium text-center relative overflow-hidden"
+          >
+            <!-- Efecto de brillo en el botón -->
+            <span class="absolute inset-0 overflow-hidden">
+              <span class="absolute -rotate-45 w-12 h-24 left-0 top-0 transform -translate-x-10 bg-white/20 blur-sm animate-shine"></span>
+            </span>
+            
+            <span class="relative flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Agendar cita ahora
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

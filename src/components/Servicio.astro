@@ -1,15 +1,243 @@
-<section id="servicio" class="bg-white text-black md:mt-16 mt-8">
-  <div class="container mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold mb-4 text-pink-500">Servicios</h2>
-    <p class="mb-8 text-lg md:text-xl lg:text-2xl font-light">Conoce los servicios que ofrecemos.</p>
-
-     <!-- Galería de imágenes -->
-    <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
-      <img src="/bg-top/servicio2.webp" alt="Diseño de uñas 1" class="w-full object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
-      <img src="/bg-top/servicio1.webp" alt="Diseño de uñas 2" class="w-full object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
+<section id="servicio" class="bg-white text-black py-16 md:py-24">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold mb-4 text-pink-500 text-center">Servicios</h2>
+    <p class="mb-12 text-lg md:text-xl lg:text-2xl font-light text-center">Conoce los servicios profesionales que ofrecemos.</p>
+    
+    <!-- VERSIÓN DESKTOP (lg y superior) -->
+    <div class="hidden lg:block">
+      <!-- Marco decorativo -->
+      <div class="relative">
+        <div class="absolute -inset-4 bg-gradient-to-br from-pink-200 via-pink-300 to-pink-200 rounded-xl opacity-60 blur-lg"></div>
+        
+        <!-- Contenido con imágenes y texto -->
+        <div class="relative p-4 bg-white rounded-xl">
+          <div class="grid grid-cols-2 gap-8">
+            <!-- Columna izquierda - Imagen -->
+            <div class="relative overflow-hidden rounded-lg shadow-lg group">
+              <img 
+                src="/bg-top/servicio2.webp" 
+                alt="Servicio de manicura profesional" 
+                class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-pink-500/80 via-pink-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-6">
+                  <h3 class="text-white text-2xl font-bold">Manicura</h3>
+                  <p class="text-white/90 mt-2">Diseños exclusivos con los mejores productos</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Columna derecha - Imagen -->
+            <div class="relative overflow-hidden rounded-lg shadow-lg group">
+              <img 
+                src="/bg-top/servicio1.webp" 
+                alt="Servicio de pedicura de lujo" 
+                class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-pink-500/80 via-pink-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-6">
+                  <h3 class="text-white text-2xl font-bold">Pedicura</h3>
+                  <p class="text-white/90 mt-2">Cuidado completo para tus pies</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Características destacadas -->
+          <div class="grid grid-cols-4 gap-4 mt-8">
+            <div class="bg-pink-50 p-4 rounded-lg text-center">
+              <div class="text-pink-500 text-3xl mb-2">✧</div>
+              <h4 class="font-semibold text-pink-700">Calidad Premium</h4>
+              <p class="text-sm text-gray-600 mt-1">Productos de alta gama</p>
+            </div>
+            <div class="bg-pink-50 p-4 rounded-lg text-center">
+              <div class="text-pink-500 text-3xl mb-2">✧</div>
+              <h4 class="font-semibold text-pink-700">Personalización</h4>
+              <p class="text-sm text-gray-600 mt-1">Diseños a tu medida</p>
+            </div>
+            <div class="bg-pink-50 p-4 rounded-lg text-center">
+              <div class="text-pink-500 text-3xl mb-2">✧</div>
+              <h4 class="font-semibold text-pink-700">Durabilidad</h4>
+              <p class="text-sm text-gray-600 mt-1">Acabados resistentes</p>
+            </div>
+            <div class="bg-pink-50 p-4 rounded-lg text-center">
+              <div class="text-pink-500 text-3xl mb-2">✧</div>
+              <h4 class="font-semibold text-pink-700">Profesionalismo</h4>
+              <p class="text-sm text-gray-600 mt-1">Servicio experto</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Botón flotante desktop -->
+      <div class="flex justify-center mt-12">
+        <a 
+          href="/Servicio_section" 
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-pink-500 to-pink-400 text-white text-lg font-medium rounded-full shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+        >
+          Ver todos los servicios y precios
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
     </div>
-    <nav class="mb-16 mt-8">
-    <a href="/Servicio_section" class="bg-pink-500 text-white px-6 py-3 rounded-lg shadow-md mt-4">Servicios y precios</a>
-    </nav>
+    
+    <!-- VERSIÓN TABLET (md-lg) -->
+    <div class="hidden md:block lg:hidden">
+      <div class="relative mx-auto">
+        <!-- Marco decorativo para tablet -->
+        <div class="absolute -inset-3 bg-gradient-to-r from-pink-200 via-pink-400 to-pink-200 rounded-xl opacity-60 blur-lg"></div>
+        
+        <!-- Contenido para tablet -->
+        <div class="relative p-4 bg-white rounded-lg">
+          <!-- Imágenes en grid -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="/bg-top/servicio2.webp" 
+                alt="Servicio de manicura" 
+                class="w-full h-64 object-cover transform hover:scale-105 transition-transform duration-500 ease-in-out"
+              />
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-pink-500/80 to-transparent p-3">
+                <h3 class="text-white text-xl font-bold">Manicura</h3>
+              </div>
+            </div>
+            
+            <div class="overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="/bg-top/servicio1.webp" 
+                alt="Servicio de pedicura" 
+                class="w-full h-64 object-cover transform hover:scale-105 transition-transform duration-500 ease-in-out"
+              />
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-pink-500/80 to-transparent p-3">
+                <h3 class="text-white text-xl font-bold">Pedicura</h3>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Lista de servicios para tablet -->
+          <div class="bg-pink-50 rounded-lg p-4 mt-6">
+            <h3 class="text-pink-700 font-semibold text-lg mb-2">Nuestros Servicios Incluyen:</h3>
+            <ul class="grid grid-cols-2 gap-2">
+              <li class="flex items-center text-gray-700">
+                <svg class="h-5 w-5 text-pink-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Manicura con Gel
+              </li>
+              <li class="flex items-center text-gray-700">
+                <svg class="h-5 w-5 text-pink-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Pedicura con Gel
+              </li>
+              <li class="flex items-center text-gray-700">
+                <svg class="h-5 w-5 text-pink-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Manicura Rubber Base
+              </li>
+              <li class="flex items-center text-gray-700">
+                <svg class="h-5 w-5 text-pink-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Pedicura Rubber Base
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Botón para tablet -->
+      <div class="mt-8 text-center">
+        <a 
+          href="/Servicio_section" 
+          class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 to-pink-400 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+        >
+          Ver servicios y precios
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <!-- VERSIÓN MÓVIL (solo sm) -->
+    <div class="md:hidden">
+      <!-- Tarjeta principal para móvil -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-pink-100 mx-auto max-w-xs">
+        <!-- Imagen destacada -->
+        <div class="relative">
+          <img 
+            src="/bg-top/servicio1.webp" 
+            alt="Servicios de manicura y pedicura" 
+            class="w-full h-60 object-cover"
+          />
+          <!-- Encabezado sobre la imagen -->
+          <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-pink-600/90 via-pink-500/50 to-transparent p-4">
+            <h3 class="text-white text-xl font-bold">Nuestros Servicios</h3>
+            <p class="text-white/90 text-sm">Calidad y profesionalismo</p>
+          </div>
+        </div>
+        
+        <!-- Tarjetas de servicios -->
+        <div class="p-4 space-y-3">
+          <div class="bg-pink-50 rounded-lg p-3 flex items-start">
+            <div class="bg-pink-200 text-pink-700 p-2 rounded-full mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-medium text-pink-700">Manicura</h4>
+              <p class="text-xs text-gray-600 mt-1">Variedad de diseños personalizados con diferentes técnicas</p>
+            </div>
+          </div>
+          
+          <div class="bg-pink-50 rounded-lg p-3 flex items-start">
+            <div class="bg-pink-200 text-pink-700 p-2 rounded-full mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-medium text-pink-700">Pedicura</h4>
+              <p class="text-xs text-gray-600 mt-1">Tratamiento completo para tus pies con los mejores productos</p>
+            </div>
+          </div>
+          
+          <!-- Imagen secundaria -->
+          <div class="relative rounded-lg overflow-hidden h-36 mt-4">
+            <img 
+              src="/bg-top/servicio2.webp" 
+              alt="Detalle de servicio de uñas" 
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/60 to-transparent"></div>
+          </div>
+        </div>
+        
+        <!-- Botón para móvil -->
+        <div class="px-4 pb-4">
+          <a 
+            href="/Servicio_section" 
+            class="block w-full bg-gradient-to-r from-pink-500 to-pink-400 text-white py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 font-medium text-center relative overflow-hidden"
+          >
+            <!-- Efecto de brillo en el botón -->
+            <span class="absolute inset-0 overflow-hidden">
+              <span class="absolute -rotate-45 w-12 h-24 left-0 top-0 transform -translate-x-10 bg-white/20 blur-sm animate-shine"></span>
+            </span>
+            
+            <span class="relative flex items-center justify-center">
+              Ver detalles y precios
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

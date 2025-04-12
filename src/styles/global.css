@@ -20,3 +20,17 @@
     display: none;
   }
 }
+
+/* Añadir al final del archivo */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(-45deg);
+  }
+  100% {
+    transform: translateX(400%) rotate(-45deg);
+  }
+}
+
+.animate-shine {
+  animation: shine 3s infinite linear;
+}
