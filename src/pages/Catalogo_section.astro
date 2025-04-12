@@ -38,6 +38,12 @@ const gallerySchema = {
     "sameAs": "https://havanera-nails.vercel.app"
   }
 };
+
+// Constantes para dimensiones de imágenes
+const THUMBNAIL_WIDTH = 300;
+const THUMBNAIL_HEIGHT = 300;
+const MODAL_WIDTH = 800;
+const MODAL_HEIGHT = 800;
 ---
 
 <Layout
@@ -54,14 +60,7 @@ const gallerySchema = {
       aria-label="Banner principal del catálogo"
     >
       <!-- Imagen de fondo con overlay -->
-      <div class="absolute inset-0 z-0">
-        <img 
-          src="/bg-top/bg-catalogo.webp"
-          alt="Fondo decorativo del catálogo de uñas" 
-          class="w-full h-full object-cover"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-pink-500/40 to-black/50"></div>
-      </div>
+      <div class="absolute inset-0 z-0 bg-gradient-to-b from-pink-300 to-pink-500"></div>
       
       <!-- Contenido del hero -->
       <div class="relative z-10 text-center px-4 mt-20">
@@ -108,8 +107,12 @@ const gallerySchema = {
               <img 
                 src={image.src} 
                 alt={image.alt} 
-                loading="lazy"
+                loading={index < 8 ? "eager" : "lazy"}
+                fetchpriority={index < 4 ? "high" : "auto"}
+                width={THUMBNAIL_WIDTH}
+                height={THUMBNAIL_HEIGHT}
                 data-index={index}
+                data-full-src={image.src}
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               
@@ -173,12 +176,23 @@ const gallerySchema = {
           &#8250;
         </button>
         <!-- Imagen a mostrar en el modal -->
-        <img 
-          id="modalImage" 
-          class="max-h-[85vh] max-w-screen-lg object-contain rounded-xl mx-auto shadow-2xl" 
-          src="" 
-          alt=""
-        />
+        <div class="relative">
+          <!-- Placeholder durante la carga -->
+          <div id="modalPlaceholder" class="w-full h-full bg-pink-100/30 animate-pulse rounded-xl flex items-center justify-center">
+            <svg class="w-12 h-12 text-pink-300 animate-spin" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </div>
+          <img 
+            id="modalImage" 
+            class="max-h-[85vh] max-w-screen-lg object-contain rounded-xl mx-auto shadow-2xl opacity-0 transition-opacity duration-300"
+            src="" 
+            alt=""
+            width={MODAL_WIDTH}
+            height={MODAL_HEIGHT}
+          />
+        </div>
         <!-- Información de la imagen -->
         <div id="modalInfo" class="absolute bottom-8 left-0 right-0 text-center text-white bg-black/40 backdrop-blur-sm py-3 px-6 mx-auto max-w-xl rounded-full">
           <p id="modalCaption" class="font-medium"></p>
@@ -192,11 +206,12 @@ const gallerySchema = {
 <script type="application/ld+json" set:html={JSON.stringify(gallerySchema)} />
 
 <script>
-  // Script para el lightbox
+  // Script para el lightbox y la carga optimizada de imágenes
   document.addEventListener('DOMContentLoaded', () => {
     // Elementos del DOM
     const modal = document.getElementById('modal') as HTMLElement;
     const modalImage = document.getElementById('modalImage') as HTMLImageElement;
+    const modalPlaceholder = document.getElementById('modalPlaceholder') as HTMLElement;
     const modalClose = document.getElementById('modalClose') as HTMLButtonElement;
     const modalPrev = document.getElementById('modalPrev') as HTMLButtonElement;
     const modalNext = document.getElementById('modalNext') as HTMLButtonElement;
@@ -209,8 +224,19 @@ const gallerySchema = {
     function openModal(index: number): void {
       currentIndex = index;
       const img = images[index];
-      const imgSrc = img.getAttribute('src') || '';
+      const imgSrc = img.getAttribute('data-full-src') || img.getAttribute('src') || '';
       const imgAlt = img.getAttribute('alt') || '';
+      
+      // Mostrar el placeholder mientras carga la imagen
+      modalPlaceholder.style.display = 'flex';
+      modalImage.style.opacity = '0';
+      
+      // Preparar la imagen
+      modalImage.onload = () => {
+        // Ocultar placeholder y mostrar imagen cuando termine de cargar
+        modalPlaceholder.style.display = 'none';
+        modalImage.style.opacity = '1';
+      };
       
       modalImage.setAttribute('src', imgSrc);
       modalImage.setAttribute('alt', imgAlt);
@@ -237,6 +263,37 @@ const gallerySchema = {
       openModal(currentIndex);
     }
     
+    // Función para lazy-load de imágenes de forma progresiva
+    function lazyLoadImages(): void {
+      // Crear IntersectionObserver para cargar imágenes cuando sean visibles
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            
+            // Si ya tiene src, no hacer nada
+            if (img.getAttribute('data-loaded') === 'true') return;
+            
+            // Marcar como cargada
+            img.setAttribute('data-loaded', 'true');
+            
+            // Detener observación
+            observer.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '100px 0px', // Empezar a cargar cuando está cerca de ser visible
+        threshold: 0.01 // Trigger cuando al menos 1% de la imagen es visible
+      });
+      
+      // Observar todas las imágenes con loading="lazy"
+      images.forEach(img => {
+        if (img.getAttribute('loading') === 'lazy') {
+          imageObserver.observe(img);
+        }
+      });
+    }
+    
     // Event listeners para el modal
     images.forEach((img, index) => {
       img.addEventListener('click', () => openModal(index));
@@ -256,6 +313,38 @@ const gallerySchema = {
     // Cerrar al hacer clic fuera
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
+    });
+    
+    // Iniciar lazy loading
+    lazyLoadImages();
+    
+    // Precarga de imágenes en segundo plano para mejorar la experiencia del modal
+    let preloadIndex = 0;
+    function preloadNextImages() {
+      if (preloadIndex >= images.length) return;
+      
+      // Precargar las siguientes 3 imágenes
+      for (let i = 0; i < 3; i++) {
+        const nextIndex = (preloadIndex + i) % images.length;
+        const imgSrc = images[nextIndex].getAttribute('data-full-src') || images[nextIndex].getAttribute('src');
+        
+        if (imgSrc) {
+          const preloadLink = document.createElement('link');
+          preloadLink.rel = 'preload';
+          preloadLink.as = 'image';
+          preloadLink.href = imgSrc;
+          document.head.appendChild(preloadLink);
+        }
+        
+        preloadIndex++;
+        if (preloadIndex >= images.length) break;
+      }
+    }
+    
+    // Empezar a precargar imágenes después de que la página esté completamente cargada
+    window.addEventListener('load', () => {
+      // Iniciar la precarga después de un retraso para permitir que se carguen los recursos críticos
+      setTimeout(preloadNextImages, 2000);
     });
   });
 </script>
@@ -278,5 +367,16 @@ const gallerySchema = {
     .gallery-item:nth-child(3n) {
       grid-row: span 1;
     }
+  }
+  
+  /* Optimizaciones de rendimiento */
+  .gallery-item {
+    will-change: transform;
+    contain: content;
+  }
+  
+  /* Garantizar el espacio para las imágenes para evitar CLS */
+  .gallery-item img {
+    aspect-ratio: 1;
   }
 </style>
