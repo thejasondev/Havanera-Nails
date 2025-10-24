@@ -1,3 +1,22 @@
+# Havanera Nails - Robots.txt
+# Salón de Uñas en Miramar, La Habana, Cuba
+
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_astro/
+
+# Crawl-delay para bots específicos
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+# Sitemap
 Sitemap: https://havanera-nails.vercel.app/sitemap.xml
+
+# Host
+Host: https://havanera-nails.vercel.app

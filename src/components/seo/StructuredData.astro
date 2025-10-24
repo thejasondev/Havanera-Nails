@@ -1,0 +1,149 @@
+---
+import { businessInfo, socialMedia, services } from "../../data/seo";
+
+interface Props {
+  type?: 'organization' | 'localBusiness' | 'service' | 'faq' | 'breadcrumb';
+  data?: any;
+}
+
+const { type = 'organization', data } = Astro.props;
+
+// Schema para Organización / Negocio Local
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "NailSalon",
+  "@id": `${businessInfo.name}#organization`,
+  "name": businessInfo.name,
+  "legalName": businessInfo.legalName,
+  "description": businessInfo.description,
+  "url": "https://havanera-nails.vercel.app",
+  "logo": "https://havanera-nails.vercel.app/logo.png",
+  "image": "https://havanera-nails.vercel.app/og-image.jpg",
+  "telephone": businessInfo.telephone,
+  "priceRange": businessInfo.priceRange,
+  "currenciesAccepted": businessInfo.currenciesAccepted,
+  "paymentAccepted": businessInfo.paymentAccepted,
+  "foundingDate": businessInfo.foundingDate,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": businessInfo.address.streetAddress,
+    "addressLocality": businessInfo.address.addressLocality,
+    "addressRegion": businessInfo.address.addressRegion,
+    "addressCountry": businessInfo.address.addressCountry
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": businessInfo.geo.latitude,
+    "longitude": businessInfo.geo.longitude
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "19:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  ],
+  "sameAs": [
+    socialMedia.instagram.url
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de Manicura y Pedicura",
+    "itemListElement": services.map(service => ({
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": service.name,
+        "description": service.description,
+        "category": service.category
+      },
+      "price": service.price,
+      "priceCurrency": service.priceCurrency
+    }))
+  }
+};
+
+// Schema para Servicios
+const serviceSchema = data ? {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": data.name,
+  "provider": {
+    "@type": "NailSalon",
+    "name": businessInfo.name,
+    "telephone": businessInfo.telephone,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": businessInfo.address.addressLocality,
+      "addressRegion": businessInfo.address.addressRegion,
+      "addressCountry": businessInfo.address.addressCountry
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "La Habana"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": data.price,
+    "priceCurrency": data.priceCurrency
+  }
+} : null;
+
+// Schema para FAQ
+const faqSchema = data ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": data.map((faq: any) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+} : null;
+
+// Schema para Breadcrumb
+const breadcrumbSchema = data ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": data.map((item: any, index: number) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.name,
+    "item": item.url
+  }))
+} : null;
+
+// Seleccionar el schema apropiado
+let schema;
+switch(type) {
+  case 'localBusiness':
+  case 'organization':
+    schema = organizationSchema;
+    break;
+  case 'service':
+    schema = serviceSchema;
+    break;
+  case 'faq':
+    schema = faqSchema;
+    break;
+  case 'breadcrumb':
+    schema = breadcrumbSchema;
+    break;
+  default:
+    schema = organizationSchema;
+}
+---
+
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

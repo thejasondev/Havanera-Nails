@@ -1,0 +1,64 @@
+---
+import { siteConfig } from "../../data/seo";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  canonicalURL?: URL | string;
+  keywords?: string[];
+  noindex?: boolean;
+  nofollow?: boolean;
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = siteConfig.ogImage,
+  type = siteConfig.type,
+  canonicalURL = Astro.url,
+  keywords = siteConfig.keywords,
+  noindex = false,
+  nofollow = false
+} = Astro.props;
+
+const canonicalUrl = typeof canonicalURL === 'string' ? canonicalURL : canonicalURL.href;
+const imageUrl = new URL(image, siteConfig.url).href;
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords.join(", ")} />
+<meta name="author" content={siteConfig.author} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Robots Meta Tags -->
+{(noindex || nofollow) && (
+  <meta name="robots" content={`${noindex ? 'noindex' : 'index'},${nofollow ? 'nofollow' : 'follow'}`} />
+)}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:site_name" content={siteConfig.name} />
+<meta property="og:locale" content={siteConfig.locale} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={imageUrl} />
+
+<!-- Additional Meta Tags -->
+<meta name="theme-color" content="#ec4899" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content={siteConfig.name} />

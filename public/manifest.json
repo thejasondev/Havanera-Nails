@@ -1,8 +1,9 @@
 {
-  "name": "Havanera Nails",
-  "short_name": "Havanera",
-  "description": "Servicio profesional de uñas en Miramar, La Habana. Manicura, pedicura y diseños personalizados.",
+  "name": "Havanera Nails - Salón de Uñas en Miramar, La Habana",
+  "short_name": "Havanera Nails",
+  "description": "Salón de uñas profesional en Miramar, La Habana. Especialistas en manicura, pedicura con gel, rubber base y diseños personalizados. Agenda tu cita.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ec4899",
@@ -10,30 +11,78 @@
     {
       "src": "/favicon/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/favicon/android-chrome-512x512.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
     }
   ],
-  "categories": ["beauty", "services", "nails"],
+  "categories": ["beauty", "lifestyle", "health"],
   "screenshots": [
     {
       "src": "/bg-top/servicio1.webp",
       "sizes": "1280x720",
       "type": "image/webp",
-      "label": "Diseños de uñas profesionales"
+      "label": "Diseños de uñas profesionales en Havanera Nails"
     },
     {
       "src": "/bg-top/servicio2.webp",
       "sizes": "1280x720",
       "type": "image/webp",
-      "label": "Servicios de manicura y pedicura"
+      "label": "Servicios de manicura y pedicura en La Habana"
     }
   ],
   "orientation": "any",
-  "lang": "es",
-  "dir": "ltr"
-} 
+  "lang": "es-CU",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "related_applications": [],
+  "shortcuts": [
+    {
+      "name": "Agendar Cita",
+      "short_name": "Agendar",
+      "description": "Agenda tu cita por WhatsApp",
+      "url": "https://wa.me/+5355118387",
+      "icons": [
+        {
+          "src": "/favicon/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Ver Servicios",
+      "short_name": "Servicios",
+      "description": "Conoce nuestros servicios y precios",
+      "url": "/Servicio_section",
+      "icons": [
+        {
+          "src": "/favicon/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Catálogo",
+      "short_name": "Catálogo",
+      "description": "Explora nuestros diseños",
+      "url": "/Catalogo_section",
+      "icons": [
+        {
+          "src": "/favicon/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

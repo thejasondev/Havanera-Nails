@@ -11,9 +11,9 @@ const servicesSchema = {
       "@type": "Offer",
       "itemOffered": {
         "@type": "Service",
-        "name": "Manicura Rubber Base",
+        "name": "Manicura Rubber Base - Uñas Cortas",
         "description": "Tratamiento con geles especiales que proporcionan una textura suave y un aspecto delicado, ideal para un look natural y sofisticado.",
-        "price": "600",
+        "price": "800",
         "priceCurrency": "CUP"
       }
     },
@@ -21,19 +21,9 @@ const servicesSchema = {
       "@type": "Offer",
       "itemOffered": {
         "@type": "Service",
-        "name": "Pedicura Rubber Base",
-        "description": "Tratamiento para pies que ofrece un acabado ligero y flexible, incluyendo exfoliación, nutrición y revitalización de la piel.",
-        "price": "600",
-        "priceCurrency": "CUP"
-      }
-    },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Manicura con Gel",
-        "description": "Tratamiento duradero con acabado profesional que resiste el paso del tiempo, fortaleciendo las uñas naturales.",
-        "price": "400",
+        "name": "Manicura Rubber Base - Uñas Largas",
+        "description": "Tratamiento con geles especiales para uñas largas que proporcionan una textura suave y un aspecto delicado.",
+        "price": "1000",
         "priceCurrency": "CUP"
       }
     },
@@ -42,8 +32,18 @@ const servicesSchema = {
       "itemOffered": {
         "@type": "Service",
         "name": "Pedicura con Gel",
-        "description": "Servicio que embellece las uñas de los pies con un tratamiento relajante para hidratar y suavizar la piel.",
-        "price": "400",
+        "description": "Tratamiento para pies que ofrece un acabado ligero y flexible, incluyendo exfoliación, nutrición y revitalización de la piel.",
+        "price": "500",
+        "priceCurrency": "CUP"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Set de Soft Gel",
+        "description": "Set completo de uñas con soft gel para un acabado profesional y duradero.",
+        "price": "1300",
         "priceCurrency": "CUP"
       }
     }
@@ -53,11 +53,11 @@ const servicesSchema = {
 // Servicios con detalles ampliados para el nuevo diseño
 const services = [
   {
-    id: "manicurarubber",
-    name: "Manicura Rubber Base",
-    price: 600,
+    id: "manicurarubber-cortas",
+    name: "Manos con Rubber - Uñas Cortas",
+    price: 800,
     imagePath: "/svg/manos_listas.svg",
-    description: "Si buscas un acabado más natural y flexible, nuestra manicura con rubber es la elección perfecta. Este innovador tratamiento utiliza geles especiales que proporcionan una textura suave y un aspecto delicado, ideal para quienes prefieren un look sutil pero sofisticado. Además, el gel rubber es conocido por su adherencia excepcional y resistencia al astillamiento, lo que garantiza una manicura duradera y cómoda.",
+    description: "Si buscas un acabado más natural y flexible, nuestra manicura con rubber es la elección perfecta. Este innovador tratamiento utiliza geles especiales que proporcionan una textura suave y un aspecto delicado, ideal para quienes prefieren un look sutil pero sofisticado. Además, el gel rubber es conocido por su adherencia excepcional y resistencia al astillamiento.",
     icons: [
       { src: "/svg/alicate.svg", alt: "Alicate para manicura" },
       { src: "/svg/lima.svg", alt: "Lima de uñas" },
@@ -70,54 +70,46 @@ const services = [
       "Mayor durabilidad que el esmalte tradicional",
       "No daña la uña natural",
       "Resistente al astillamiento"
-    ]
-  },
-  {
-    id: "pedicurarubber",
-    name: "Pedicura Rubber Base",
-    price: 600,
-    imagePath: "/svg/pies.svg",
-    description: "Nuestra pedicura con rubber, diseñada para quienes valoran la naturalidad y la comodidad. Este tratamiento ofrece un acabado ligero y flexible que realza la belleza de tus pies sin sacrificar la durabilidad. Además, incluimos un cuidado integral que exfolia, nutre y revitaliza tu piel, dejándola suave y sedosa.",
-    icons: [
-      { src: "/svg/alicate.svg", alt: "Alicate para pedicura" },
-      { src: "/svg/guayo.svg", alt: "Guayo exfoliante para pies" },
-      { src: "/svg/pintura.svg", alt: "Esmalte para uñas de pies" },
-      { src: "/svg/lámpara.svg", alt: "Lámpara UV para secado" },
-      { src: "/svg/pies.svg", alt: "Pies con pedicura terminada" }
     ],
-    benefits: [
-      "Exfoliación completa",
-      "Hidratación profunda",
-      "Acabado ligero y flexible",
-      "Mayor durabilidad"
+    includes: [
+      "Diseños sencillos (sin relieves, líneas, flores o dibujos)",
+      "Efectos en geles o polvo",
+      "Decoraciones (stickers, piedras)",
+      "Francesa o filo blanco"
     ]
   },
   {
-    id: "manicuragel",
-    name: "Manicura con Gel",
-    price: 400,
+    id: "manicurarubber-largas",
+    name: "Manos con Rubber - Uñas Largas",
+    price: 1000,
     imagePath: "/svg/manos_listas.svg",
-    description: "Nuestra manicura con gel es el tratamiento ideal para quienes buscan durabilidad y un acabado profesional que resista el paso del tiempo. Utilizamos productos de alta calidad que garantizan una aplicación uniforme, colores vibrantes y un brillo espectacular que no se astilla.",
+    description: "Tratamiento especializado para uñas largas con rubber base. Este servicio ofrece un acabado profesional y duradero, perfecto para quienes desean lucir uñas largas con un aspecto natural y elegante. El gel rubber proporciona flexibilidad y resistencia excepcional.",
     icons: [
-      { src: "/svg/alicate.svg", alt: "Alicate para manicura gel" },
-      { src: "/svg/lima.svg", alt: "Lima para preparación de uñas" },
-      { src: "/svg/pintura.svg", alt: "Gel para uñas" },
-      { src: "/svg/lámpara.svg", alt: "Lámpara de secado UV" },
-      { src: "/svg/manos_listas.svg", alt: "Resultado final de manicura gel" }
+      { src: "/svg/alicate.svg", alt: "Alicate para manicura" },
+      { src: "/svg/lima.svg", alt: "Lima de uñas" },
+      { src: "/svg/pintura.svg", alt: "Esmalte de uñas" },
+      { src: "/svg/lámpara.svg", alt: "Lámpara UV para uñas" },
+      { src: "/svg/manos_listas.svg", alt: "Manos con manicura terminada" }
     ],
     benefits: [
-      "Brillo extraordinario",
-      "Colores vibrantes",
-      "Hasta 3 semanas de duración",
-      "Fortalece las uñas naturales"
+      "Ideal para uñas largas",
+      "Máxima durabilidad",
+      "Flexibilidad natural",
+      "Resistencia superior"
+    ],
+    includes: [
+      "Diseños sencillos (sin relieves, líneas, flores o dibujos)",
+      "Efectos en geles o polvo",
+      "Decoraciones (stickers, piedras)",
+      "Francesa o filo blanco"
     ]
   },
   {
     id: "pedicuragel",
-    name: "Pedicura con Gel",
-    price: 400,
+    name: "Pies con Gel",
+    price: 500,
     imagePath: "/svg/pies.svg",
-    description: "Dale a tus pies el cuidado que merecen con nuestra exclusiva pedicura con gel. Este servicio no solo embellece tus uñas, sino que también incluye un tratamiento relajante para hidratar y suavizar tu piel, dejando tus pies renovados y listos para cualquier ocasión.",
+    description: "Dale a tus pies el cuidado que merecen con nuestra exclusiva pedicura con gel. Este servicio no solo embellece tus uñas, sino que también incluye un tratamiento relajante con cremas exfoliantes para hidratar y suavizar tu piel, dejando tus pies renovados y listos para cualquier ocasión.",
     icons: [
       { src: "/svg/alicate.svg", alt: "Alicate para pedicura gel" },
       { src: "/svg/guayo.svg", alt: "Exfoliante para pies" },
@@ -126,10 +118,63 @@ const services = [
       { src: "/svg/pies.svg", alt: "Pies con pedicura gel terminada" }
     ],
     benefits: [
-      "Tratamiento relajante",
+      "Tratamiento relajante completo",
       "Hidratación intensiva",
       "Acabado duradero",
       "Ideal para sandalias y calzado abierto"
+    ],
+    includes: [
+      "Cremas exfoliantes para los pies",
+      "Diseños sencillos",
+      "Efectos en geles o polvo",
+      "Decoraciones (stickers, piedras)",
+      "Francesa o filo blanco"
+    ]
+  },
+  {
+    id: "softgel",
+    name: "Set de Soft Gel",
+    price: 1300,
+    imagePath: "/svg/manos_listas.svg",
+    description: "Nuestro set completo de soft gel es la solución perfecta para quienes buscan uñas impecables y duraderas. Este tratamiento profesional ofrece un acabado elegante y resistente, ideal para mantener tus uñas hermosas por más tiempo. Incluye aplicación completa y diseño personalizado.",
+    icons: [
+      { src: "/svg/alicate.svg", alt: "Alicate para soft gel" },
+      { src: "/svg/lima.svg", alt: "Lima para preparación" },
+      { src: "/svg/pintura.svg", alt: "Soft gel" },
+      { src: "/svg/lámpara.svg", alt: "Lámpara de secado UV" },
+      { src: "/svg/manos_listas.svg", alt: "Resultado final soft gel" }
+    ],
+    benefits: [
+      "Set completo profesional",
+      "Máxima durabilidad",
+      "Acabado elegante",
+      "Resistencia superior"
+    ],
+    includes: [
+      "Aplicación completa de soft gel",
+      "Diseños sencillos",
+      "Efectos en geles o polvo",
+      "Decoraciones (stickers, piedras)",
+      "Francesa o filo blanco"
+    ],
+    extraInfo: "Reposición de uñas: 100 CUP c/u"
+  }
+];
+
+// Servicios adicionales y personalizaciones
+const additionalServices = [
+  {
+    category: "Diseños con Relieve",
+    items: [
+      { name: "Diseños con relieve sencillos", price: "200 CUP" },
+      { name: "Diseños con relieve complejos (flores o figuras)", price: "200-500 CUP" }
+    ]
+  },
+  {
+    category: "Diseños a Mano Alzada",
+    items: [
+      { name: "Diseños a mano alzada que incluyan efectos", price: "200-400 CUP" },
+      { name: "Diseños a mano alzada complejos", price: "200-400 CUP" }
     ]
   }
 ];
@@ -257,6 +302,12 @@ const services = [
                         {service.price} CUP
                       </div>
                       
+                      {service.extraInfo && (
+                        <div class="inline-block ml-2 px-3 py-1 bg-pink-50 text-pink-500 text-sm rounded-full mb-4">
+                          {service.extraInfo}
+                        </div>
+                      )}
+                      
                       <!-- Iconos para móvil en fila -->
                       <div class="md:hidden flex justify-center space-x-3 my-4">
                         {service.icons.map(icon => (
@@ -272,13 +323,26 @@ const services = [
                     </div>
                     
                     <!-- Beneficios del servicio -->
-                    <div>
+                    <div class="mb-6">
                       <h4 class="text-lg font-medium text-gray-800 mb-3">Beneficios:</h4>
                       <ul class="space-y-2">
                         {service.benefits.map(benefit => (
                           <li class="flex items-start">
                             <span class="text-pink-500 mr-2">✓</span>
-                            <span>{benefit}</span>
+                            <span class="text-gray-700">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <!-- Lo que incluye -->
+                    <div class="mb-6 bg-pink-50/50 p-4 rounded-lg">
+                      <h4 class="text-lg font-medium text-gray-800 mb-3">Incluye:</h4>
+                      <ul class="space-y-2">
+                        {service.includes.map(include => (
+                          <li class="flex items-start">
+                            <span class="text-pink-400 mr-2">•</span>
+                            <span class="text-gray-700 text-sm">{include}</span>
                           </li>
                         ))}
                       </ul>
@@ -287,7 +351,7 @@ const services = [
                     <!-- Botón de reserva -->
                     <div class="mt-8">
                       <a 
-                        href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20servicio%20de%20{service.name}.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" 
+                        href={`https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20servicio%20de%20${encodeURIComponent(service.name)}.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?`}
                         class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 to-pink-400 text-white font-medium rounded-full shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -303,6 +367,47 @@ const services = [
               </div>
             </div>
           ))}
+        </div>
+        
+        <!-- Servicios adicionales y personalizaciones -->
+        <div class="mt-24 max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h3 class="text-3xl md:text-4xl font-satisfy text-pink-500 mb-4">Personaliza tu Servicio</h3>
+            <p class="text-lg text-gray-700">
+              Agrega diseños especiales y personalizaciones a tu servicio básico
+            </p>
+            <div class="flex justify-center mt-6">
+              <div class="w-24 h-1 bg-gradient-to-r from-pink-300 to-pink-500 rounded-full"></div>
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            {additionalServices.map(category => (
+              <div class="bg-white rounded-xl shadow-lg p-6 border-2 border-pink-100 hover:border-pink-300 transition-colors duration-300">
+                <h4 class="text-xl font-satisfy text-pink-500 mb-4 text-center">
+                  {category.category}
+                </h4>
+                <ul class="space-y-3">
+                  {category.items.map(item => (
+                    <li class="flex justify-between items-center p-3 bg-pink-50/50 rounded-lg">
+                      <span class="text-gray-700 text-sm md:text-base">{item.name}</span>
+                      <span class="text-pink-600 font-medium text-sm md:text-base whitespace-nowrap ml-2">
+                        +{item.price}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          
+          <!-- Nota informativa -->
+          <div class="mt-8 bg-gradient-to-r from-pink-50 to-pink-100/50 p-6 rounded-xl border border-pink-200">
+            <p class="text-center text-gray-700">
+              <span class="font-medium text-pink-600">Nota:</span> Los precios de personalización se cobran 
+              adicionalmente al precio base del servicio seleccionado.
+            </p>
+          </div>
         </div>
         
         <!-- Llamada a la acción final -->

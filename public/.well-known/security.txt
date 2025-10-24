@@ -1,0 +1,3 @@
+Contact: https://wa.me/+5355118387
+Preferred-Languages: es, en
+Canonical: https://havanera-nails.vercel.app/.well-known/security.txt
