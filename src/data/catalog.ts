@@ -1,0 +1,41 @@
+export interface CatalogImage {
+  src: string;
+  alt: string;
+}
+
+export const images: CatalogImage[] = [
+  { src: '/arreglos/arreglo1.webp', alt: 'Diseño de uñas con glitter y decoración floral' },
+  { src: '/arreglos/arreglo2.webp', alt: 'Manicura francesa con detalles elegantes' },
+  { src: '/arreglos/arreglo3.webp', alt: 'Uñas con diseño geométrico y acabado brillante' },
+  { src: '/arreglos/arreglo4.webp', alt: 'Nail art con decoración de pedrería' },
+  { src: '/arreglos/arreglo5.webp', alt: 'Diseño minimalista con detalles metálicos' },
+  { src: '/arreglos/arreglo6.webp', alt: 'Uñas decoradas con efecto degradado' },
+  { src: '/arreglos/arreglo7.webp', alt: 'Manicura rubber base con decoración' },
+  { src: '/arreglos/arreglo8.webp', alt: 'Diseño creativo con líneas y puntos' },
+  { src: '/arreglos/arreglo9.webp', alt: 'Uñas con acabado mate y detalles brillantes' },
+  { src: '/arreglos/arreglo10.webp', alt: 'Manicura con diseño floral detallado' },
+  { src: '/arreglos/arreglo11.webp', alt: 'Uñas estilo ombré con decoración' },
+  { src: '/arreglos/arreglo12.webp', alt: 'Diseño elegante con tonos pasteles' },
+  { src: '/arreglos/arreglo13.webp', alt: 'Manicura con efecto espejo y pedrería' },
+  { src: '/arreglos/arreglo14.webp', alt: 'Nail art con efecto mármol y detalles dorados' },
+  { src: '/arreglos/arreglo15.webp', alt: 'Diseño tropical con colores vibrantes' },
+  { src: '/arreglos/arreglo16.webp', alt: 'Uñas con aplicaciones decorativas' },
+  { src: '/arreglos/arreglo17.webp', alt: 'Manicura con diseño abstracto y brillo' },
+  { src: '/arreglos/arreglo18.webp', alt: 'Diseño temático con decoración especial' },
+  { src: '/arreglos/arreglo19.webp', alt: 'Uñas con efecto texturizado y pedrería' },
+  { src: '/arreglos/arreglo20.webp', alt: 'Manicura elegante para eventos especiales' },
+  { src: '/arreglos/arreglo21.webp', alt: 'Diseño exclusivo con detallado artístico' },
+  { src: '/arreglos/arreglo22.webp', alt: 'Diseño moderno con detalles en relieve' },
+  { src: '/arreglos/arreglo23.webp', alt: 'Uñas con acabado satinado y sutiles brillos' },
+  { src: '/arreglos/arreglo24.webp', alt: 'Manicura artística con combinación de texturas' },
+  { src: '/arreglos/arreglo25.webp', alt: 'Diseño elegante con incrustaciones delicadas' },
+  { src: '/arreglos/arreglo26.webp', alt: 'Uñas con estilo vanguardista y colores de temporada' },
+  { src: '/arreglos/arreglo27.webp', alt: 'Manicura clásica reinventada con toques modernos' },
+  { src: '/arreglos/arreglo28.webp', alt: 'Diseño sofisticado ideal para celebraciones' },
+  { src: '/arreglos/arreglo29.webp', alt: 'Uñas con patrones intrincados y acabado prolijo' },
+  { src: '/arreglos/arreglo30.webp', alt: 'Manicura fresca y juvenil con colores alegres' },
+  { src: '/arreglos/arreglo31.webp', alt: 'Diseño de lujo con detalles dorados y brillo' },
+  { src: '/arreglos/arreglo32.webp', alt: 'Uñas minimalistas con un toque chic' },
+  { src: '/arreglos/arreglo33.webp', alt: 'Manicura con efectos visuales únicos' },
+  { src: '/arreglos/arreglo34.webp', alt: 'Diseño final con acabado profesional impecable' },
+];
