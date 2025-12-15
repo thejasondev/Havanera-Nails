@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import SEOHead from '../components/seo/SEOHead.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
 import { siteConfig } from '../data/seo';
+import Analytics from '@vercel/analytics/astro';
 
 const { 
   title = siteConfig.title,
@@ -65,6 +66,9 @@ const {
     
     <!-- Datos estructurados JSON-LD -->
     <StructuredData type={structuredDataType} data={structuredData} />
+
+    <!-- Analytics -->
+    <Analytics />
   </head>
   <body class="antialiased">
     <Header />
