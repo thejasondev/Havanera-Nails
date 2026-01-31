@@ -78,23 +78,30 @@ const {
     <Header />
     <slot />
     <!-- Botón WhatsApp flotante global -->
-    <WhatsAppButton variant="floating" />
+    <WhatsAppButton variant="floating" class="floating-whatsapp" />
     <Footer />
-  </body><style is:global>
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      font-family: 'Raleway Variable', system-ui, sans-serif;
-    }
-    h1,
-    h2 {
-      font-family: 'Satisfy', cursive;
-    }
-    @media (prefers-reduced-motion: reduce) {
+    <style is:global>
       html {
-        scroll-behavior: auto;
+        scroll-behavior: smooth;
       }
-    }
-  </style>
+      body {
+        font-family: 'Raleway Variable', system-ui, sans-serif;
+      }
+      /* Ocultar botón flotante cuando el menú está abierto */
+      body.menu-open .floating-whatsapp {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
+      }
+      h1,
+      h2 {
+        font-family: 'Satisfy', cursive;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </body>
 </html>
