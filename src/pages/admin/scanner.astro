@@ -332,41 +332,17 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
 </Layout>
 
 <style>
-  /* Estilos del lector QR */
+  /* Estilos del lector QR - Limpios y nativos */
+  #qr-reader {
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
   #qr-reader video {
     border-radius: 1rem;
     object-fit: cover;
-  }
-
-  #qr-reader__scan_region img {
-    display: none !important;
-  }
-
-  #qr-reader__dashboard {
-    padding: 0.75rem !important;
-    background: transparent !important;
-  }
-
-  #qr-reader__dashboard button {
-    background: linear-gradient(to right, #ec4899, #f472b6) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 0.75rem !important;
-    padding: 0.75rem 1.5rem !important;
-    font-weight: 600 !important;
-    font-size: 0.875rem !important;
-  }
-
-  #qr-reader__dashboard select {
-    background: white !important;
-    color: #374151 !important;
-    border: 1px solid #f9a8d4 !important;
-    border-radius: 0.5rem !important;
-    padding: 0.5rem !important;
-  }
-
-  #qr-reader__dashboard span {
-    color: #6b7280 !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   /* Animación del código */
@@ -401,7 +377,7 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
 </style>
 
 <script>
-  import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode';
+  import { Html5Qrcode } from 'html5-qrcode';
   import { generateTimeBasedCode } from '../../scripts/loyalty';
 
   // Elementos del DOM
@@ -415,68 +391,68 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
   const scanHistory = document.getElementById('scan-history');
 
   // Estado
-  let scanner: Html5QrcodeScanner | null = null;
+  let html5QrCode: Html5Qrcode | null = null;
   let timerInterval: ReturnType<typeof setInterval> | null = null;
   let history: { time: string; clientId: string; code: string }[] = [];
   const TIMER_DURATION = 120; // 2 minutos
 
-  // Inicializar scanner
-  function initScanner() {
-    scanner = new Html5QrcodeScanner(
-      'qr-reader',
-      {
+  // Inicializar scanner con cámara trasera
+  async function initScanner() {
+    try {
+      html5QrCode = new Html5Qrcode('qr-reader');
+
+      const config = {
         fps: 10,
-        qrbox: { width: 200, height: 200 },
-        supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-        rememberLastUsedCamera: true,
-        aspectRatio: 1,
-      },
-      false
-    );
+        qrbox: { width: 250, height: 250 },
+        aspectRatio: 1.0,
+      };
 
-    scanner.render(onScanSuccess, onScanFailure);
+      // Intentar iniciar con la cámara trasera ('environment')
+      await html5QrCode.start({ facingMode: 'environment' }, config, onScanSuccess, onScanFailure);
 
-    if (scannerStatus) {
-      scannerStatus.innerHTML = `
-        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-        <span class="text-sm">Buscando código QR...</span>
-      `;
+      // Actualizar estado visual
+      if (scannerStatus) {
+        scannerStatus.innerHTML = `
+          <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <span class="text-sm">Escaneando...</span>
+        `;
+      }
+    } catch (err) {
+      console.error('Error al iniciar el scanner:', err);
+      if (scannerStatus) {
+        scannerStatus.innerHTML = `
+          <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+          <span class="text-sm text-red-500">Error de cámara: Permiso denegado</span>
+        `;
+      }
     }
   }
 
   // Manejo de escaneo exitoso
-  function onScanSuccess(clientId: string) {
-    // Validar que sea un UUID válido
-    if (!clientId || clientId.length < 8) {
-      return;
+  function onScanSuccess(decodedText: string, _decodedResult: any) {
+    // Validar formato UUID básico (aprox)
+    if (!decodedText || decodedText.length < 8) return;
+
+    // Detener escaneo para ahorrar recursos y evitar lecturas múltiples
+    if (html5QrCode && html5QrCode.isScanning) {
+      html5QrCode.pause(true);
     }
 
-    // Detener scanner temporalmente
-    if (scanner) {
-      scanner.pause(true);
-    }
+    // Generar código
+    const code = generateTimeBasedCode(decodedText);
 
-    // Generar código basado en tiempo
-    const code = generateTimeBasedCode(clientId);
-
-    // Reproducir sonido de éxito
+    // Feedback usuario
     playSuccessSound();
+    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
 
-    // Vibrar si está disponible
-    if (navigator.vibrate) {
-      navigator.vibrate([100, 50, 100]);
-    }
-
-    // Mostrar código
-    showCode(code, clientId);
-
-    // Agregar al historial
-    addToHistory(clientId, code);
+    // Mostrar UI de resultado
+    showCode(code, decodedText);
+    addToHistory(decodedText, code);
   }
 
-  // Manejo de error (ignorar - es normal mientras busca)
-  function onScanFailure(_error: string) {
-    // No hacer nada, es normal mientras busca
+  // Manejo de fallos (ruido constante, ignorar)
+  function onScanFailure(_error: any) {
+    // No loguear para no ensuciar consola
   }
 
   // Mostrar el código generado
@@ -486,10 +462,11 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
     generatedCode.textContent = code;
     generatedCode.classList.add('animate-pulse-code');
 
+    // Transición suave
+    scannerSection.style.display = 'none';
     scannerSection.classList.add('hidden');
     codeSection.classList.remove('hidden');
 
-    // Iniciar timer de 2 minutos
     startTimer(TIMER_DURATION);
   }
 
@@ -517,69 +494,54 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
     const secs = remaining % 60;
     timerDisplay.textContent = `Válido por ${mins}:${secs.toString().padStart(2, '0')}`;
 
-    // Actualizar barra de progreso
     if (timerBar) {
       const percentage = (remaining / total) * 100;
       timerBar.style.width = `${percentage}%`;
-    }
 
-    // Cambiar color si queda poco tiempo
-    if (remaining <= 30) {
-      timerDisplay.classList.add('text-yellow-300');
-      timerBar?.classList.add('bg-yellow-400');
-      timerBar?.classList.remove('bg-white');
-    }
-    if (remaining <= 10) {
-      timerDisplay.classList.remove('text-yellow-300');
-      timerDisplay.classList.add('text-red-300');
-      timerBar?.classList.remove('bg-yellow-400');
-      timerBar?.classList.add('bg-red-400');
+      // Colores de advertencia
+      if (remaining > 30) {
+        timerBar.className = 'h-full bg-white rounded-full transition-all duration-1000';
+        timerDisplay.className = 'text-pink-100 text-sm font-medium';
+      } else if (remaining <= 30 && remaining > 10) {
+        timerBar.className = 'h-full bg-yellow-400 rounded-full transition-all duration-1000';
+        timerDisplay.className = 'text-yellow-300 text-sm font-medium';
+      } else {
+        timerBar.className = 'h-full bg-red-400 rounded-full transition-all duration-1000';
+        timerDisplay.className = 'text-red-300 text-sm font-medium';
+      }
     }
   }
 
   // Volver al scanner
   function resetToScanner() {
-    if (timerInterval) {
-      clearInterval(timerInterval);
-    }
+    if (timerInterval) clearInterval(timerInterval);
 
     if (codeSection && scannerSection) {
       codeSection.classList.add('hidden');
+      scannerSection.style.display = 'block';
       scannerSection.classList.remove('hidden');
     }
 
-    if (timerDisplay) {
-      timerDisplay.classList.remove('text-yellow-300', 'text-red-300');
-    }
-
-    if (timerBar) {
-      timerBar.style.width = '100%';
-      timerBar.classList.remove('bg-yellow-400', 'bg-red-400');
-      timerBar.classList.add('bg-white');
-    }
-
-    if (generatedCode) {
-      generatedCode.classList.remove('animate-pulse-code');
-    }
+    if (generatedCode) generatedCode.classList.remove('animate-pulse-code');
 
     // Reanudar scanner
-    if (scanner) {
-      scanner.resume();
+    if (html5QrCode) {
+      html5QrCode.resume();
+      if (scannerStatus) {
+        scannerStatus.innerHTML = `
+          <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <span class="text-sm">Escaneando...</span>
+        `;
+      }
     }
   }
 
-  // Agregar al historial
+  // Historial
   function addToHistory(clientId: string, code: string) {
     const now = new Date();
     const time = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-
     history.unshift({ time, clientId: clientId.slice(0, 8), code });
-
-    // Mantener solo los últimos 5
-    if (history.length > 5) {
-      history = history.slice(0, 5);
-    }
-
+    if (history.length > 5) history = history.slice(0, 5);
     updateHistoryUI();
   }
 
@@ -595,8 +557,7 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
             </svg>
             <p class="text-sm">Sin escaneos recientes</p>
           </div>
-        </div>
-      `;
+        </div>`;
       return;
     }
 
@@ -605,7 +566,7 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
         (item, index) => `
         <div class="flex items-center justify-between py-3 px-3 ${index !== history.length - 1 ? 'border-b border-pink-100' : ''} hover:bg-pink-50 rounded-lg transition-colors">
           <div class="flex items-center gap-3">
-            <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
+             <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
@@ -622,12 +583,10 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
       .join('');
   }
 
-  // Sonido de éxito mejorado
+  // Sonido
   function playSuccessSound() {
     try {
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-
-      // Primer tono
       const osc1 = audioContext.createOscillator();
       const gain1 = audioContext.createGain();
       osc1.connect(gain1);
@@ -638,7 +597,6 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
       osc1.start();
       osc1.stop(audioContext.currentTime + 0.12);
 
-      // Segundo tono (más alto)
       setTimeout(() => {
         const osc2 = audioContext.createOscillator();
         const gain2 = audioContext.createGain();
@@ -651,13 +609,12 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
         osc2.stop(audioContext.currentTime + 0.15);
       }, 120);
     } catch (e) {
-      // Audio no disponible, ignorar
+      /* ignore */
     }
   }
 
-  // Event listeners
   scanAgainBtn?.addEventListener('click', resetToScanner);
 
-  // Inicializar al cargar
+  // Iniciar
   initScanner();
 </script>
