@@ -1,126 +1,294 @@
-<header id="header" class="fixed left-0 top-0 w-full z-50 bg-transparent transition-all duration-300">
+---
+// Detectar la página actual para el indicador activo
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  id="header"
+  class="fixed left-0 top-0 w-full z-50 bg-transparent transition-all duration-300"
+>
   <div class="container mx-auto z-10 flex flex-col text-center inset-x-0 top-0">
-    <a href="/">
+    <a href="/" class="focus-ring">
       <h1 class="text-3xl md:text-4xl font-bold text-pink-500 leading-tight lg:mr-0 mt-6 mb-2 mr-6">
-        Havanera<br>Nails
+        Havanera<br />Nails
       </h1>
     </a>
 
     <!-- Navegación izquierda (escritorio) -->
     <ul class="hidden lg:flex absolute top-8 left-20 text-black space-x-24 text-lg font-normal">
-      <li><a href="https://wa.me/+5355118387?text=Hola,%20deseo%20solicitar%20tus%20servicios."
-        target="_blank"
-        rel="noopener noreferrer" class="hover:text-pink-500">Agendar</a></li>
-      <li><a href="/Catalogo_section" class="hover:text-pink-500">Catálogo</a></li>
+      <li>
+        <a
+          href="https://wa.me/+5355118387?text=Hola,%20deseo%20solicitar%20tus%20servicios."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-link hover:text-pink-500 focus-ring">Agendar</a>
+      </li>
+      <li>
+        <a
+          href="/Catalogo_section"
+          class="nav-link hover:text-pink-500 focus-ring"
+          aria-current={currentPath === '/Catalogo_section' ? 'page' : undefined}>Catálogo</a>
+      </li>
     </ul>
 
     <!-- Navegación derecha (escritorio) -->
     <ul class="hidden lg:flex absolute top-8 right-20 text-black space-x-24 text-lg font-normal">
-      <li><a href="/Servicio_section" class="hover:text-pink-500">Servicios</a></li>
-      <li><a href="/Contacto" class="hover:text-pink-500">Contacto</a></li>
+      <li>
+        <a
+          href="/Servicio_section"
+          class="nav-link hover:text-pink-500 focus-ring"
+          aria-current={currentPath === '/Servicio_section' ? 'page' : undefined}>Servicios</a>
+      </li>
+      <li>
+        <a
+          href="/Contacto"
+          class="nav-link hover:text-pink-500 focus-ring"
+          aria-current={currentPath === '/Contacto' ? 'page' : undefined}>Contacto</a>
+      </li>
     </ul>
 
     <!-- Menú hamburguesa (móviles) -->
     <div class="absolute lg:hidden">
-      <button id="menu-toggle" class="fixed focus:outline-none p-2 rounded-full ml-5 mt-8 z-50 lg:hidden bg-white/80 backdrop-blur-sm shadow-md hover:bg-pink-50 transition-all duration-300">
+      <button
+        id="menu-toggle"
+        class="fixed focus:outline-none p-2 rounded-full ml-5 mt-8 z-50 lg:hidden bg-white/80 backdrop-blur-sm shadow-md hover:bg-pink-50 transition-all duration-300"
+      >
         <!-- ícono menú al abrir -->
-        <svg id="menu-icon-open" class="block w-7 h-7 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        <svg
+          id="menu-icon-open"
+          class="block w-7 h-7 text-pink-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"></path>
         </svg>
 
         <!-- Ícono cerrar -->
-        <svg id="menu-icon-close" class="hidden w-7 h-7 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        <svg
+          id="menu-icon-close"
+          class="hidden w-7 h-7 text-pink-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
-    
+
     <!-- Menú desplegable para móviles -->
-    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-white/95 backdrop-blur-md shadow-md z-40 lg:hidden overflow-hidden">
+    <div
+      id="mobile-menu"
+      class="hidden fixed top-0 left-0 w-full h-screen bg-white/95 backdrop-blur-md shadow-md z-40 lg:hidden overflow-hidden"
+    >
       <!-- Elementos decorativos para el menú -->
-      <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-pink-200 via-pink-100 to-transparent rounded-full -mr-20 -mt-20 opacity-70"></div>
-      <div class="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-pink-200 via-pink-100 to-transparent rounded-full -ml-10 -mb-10 opacity-70"></div>
-      
+      <div
+        class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-pink-200 via-pink-100 to-transparent rounded-full -mr-20 -mt-20 opacity-70"
+      >
+      </div>
+      <div
+        class="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-pink-200 via-pink-100 to-transparent rounded-full -ml-10 -mb-10 opacity-70"
+      >
+      </div>
+
       <!-- Círculo decorativo con logo -->
       <div class="absolute top-6 left-1/2 transform -translate-x-1/2">
         <div class="w-16 h-16 rounded-full shadow-lg overflow-hidden bg-white">
-          <img 
-            src="/logo.png" 
-            alt="Logo de Havanera Nails" 
+          <img
+            src="/logo.png"
+            alt="Logo de Havanera Nails"
             class="w-full h-full object-cover"
             width="64"
             height="64"
           />
         </div>
       </div>
-      
+
       <div class="relative z-10 h-full flex flex-col justify-center px-6">
         <h2 class="text-3xl font-satisfy text-pink-500 mt-6 mb-10 text-center">Havanera Nails</h2>
         <nav>
           <ul class="flex flex-col items-stretch space-y-6 text-lg max-w-xs mx-auto w-full">
             <li>
-              <a href="/" class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2">
+              <a
+                href="/"
+                class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2"
+              >
                 <span class="bg-pink-100 rounded-full p-2 mr-4 flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-pink-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                    ></path>
                   </svg>
                 </span>
                 <span class="font-medium">Inicio</span>
               </a>
             </li>
             <li>
-              <a href="/Catalogo_section" class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2">
+              <a
+                href="/Catalogo_section"
+                class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2"
+              >
                 <span class="bg-pink-100 rounded-full p-2 mr-4 flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-pink-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    ></path>
                   </svg>
                 </span>
                 <span class="font-medium">Catálogo</span>
               </a>
             </li>
             <li>
-              <a href="/Servicio_section" class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2">
+              <a
+                href="/Servicio_section"
+                class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2"
+              >
                 <span class="bg-pink-100 rounded-full p-2 mr-4 flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-pink-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                    ></path>
                   </svg>
                 </span>
                 <span class="font-medium">Servicios</span>
               </a>
             </li>
             <li>
-              <a href="/FAQ_section" class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2">
+              <a
+                href="/FAQ_section"
+                class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2"
+              >
                 <span class="bg-pink-100 rounded-full p-2 mr-4 flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-pink-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
                   </svg>
                 </span>
                 <span class="font-medium">FAQ</span>
               </a>
             </li>
             <li>
-              <a href="/Contacto" class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2">
+              <a
+                href="/Contacto"
+                class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2"
+              >
                 <span class="bg-pink-100 rounded-full p-2 mr-4 flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-pink-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    ></path>
                   </svg>
                 </span>
                 <span class="font-medium">Contacto</span>
               </a>
             </li>
+            <li>
+              <a
+                href="/mi-tarjeta"
+                class="text-gray-800 hover:text-pink-500 transition-colors duration-300 flex items-center w-full py-2"
+              >
+                <span
+                  class="bg-gradient-to-r from-pink-500 to-pink-400 rounded-full p-2 mr-4 flex-shrink-0"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+                    ></path>
+                  </svg>
+                </span>
+                <span class="font-medium">Mi Tarjeta</span>
+                <span
+                  class="ml-auto text-xs bg-pink-100 text-pink-600 px-2 py-1 rounded-full font-semibold"
+                  >Nuevo</span
+                >
+              </a>
+            </li>
           </ul>
         </nav>
-        
+
         <!-- Botón para agendar integrado al menú -->
         <div class="mt-12 text-center">
-          <a 
-            href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" 
-            target="_blank" 
+          <a
+            href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?"
+            target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-pink-500 to-pink-400 text-white font-medium rounded-full shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-2"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              ></path>
             </svg>
             Agendar cita
           </a>
@@ -128,16 +296,23 @@
       </div>
     </div>
 
-    <!-- Reservar botón separado (móviles) --> 
+    <!-- Reservar botón separado (móviles) -->
     <div class="absolute top-8 right-5 lg:hidden">
-      <a 
-        href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?" 
-        target="_blank" 
-        rel="noopener noreferrer" 
+      <a
+        href="https://wa.me/+5355118387?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20mis%20uñas.%20¿Podrías%20confirmarme%20la%20disponibilidad,%20por%20favor?"
+        target="_blank"
+        rel="noopener noreferrer"
         class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-400 text-white font-medium rounded-full shadow-lg transform transition-all duration-300 hover:-translate-y-1 text-sm"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4 mr-1"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+          ></path>
         </svg>
         Agendar
       </a>
@@ -145,9 +320,5 @@
   </div>
 </header>
 
-<script
-  src="/src/scripts/menu-toggle.ts">
-</script>
-<script
-  src="/src/scripts/scrollHeader.ts">
-</script>
+<script src="/src/scripts/menu-toggle.ts"></script>
+<script src="/src/scripts/scrollHeader.ts"></script>

@@ -1,0 +1,663 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = 'Scanner Admin | Havanera Nails';
+const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
+---
+
+<Layout title={pageTitle} description={pageDescription} noindex={true} nofollow={true}>
+  <main class="min-h-screen bg-gradient-to-b from-pink-50 to-white pt-28 pb-24 px-4">
+    <div class="max-w-md mx-auto">
+      <!-- Header con logo y título -->
+      <header class="text-center mb-6">
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl shadow-lg shadow-pink-500/25 mb-4"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"
+            ></path>
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-pink-500 mb-1">Scanner Admin</h1>
+        <p class="text-gray-500 text-sm">Escanea el QR de la cliente</p>
+      </header>
+
+      <!-- Scanner Section -->
+      <div
+        id="scanner-section"
+        class="bg-white rounded-3xl shadow-xl p-5 mb-5 relative overflow-hidden"
+      >
+        <!-- Decoración -->
+        <div class="absolute -top-8 -right-8 w-24 h-24 bg-pink-100 rounded-full opacity-50"></div>
+        <div class="absolute -bottom-6 -left-6 w-20 h-20 bg-pink-200 rounded-full opacity-30"></div>
+
+        <div class="relative z-10">
+          <div
+            id="qr-reader"
+            class="w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-pink-100 to-pink-50 relative"
+          >
+            <!-- Overlay con marco de escaneo -->
+            <div class="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
+              <div class="w-52 h-52">
+                <div
+                  class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-pink-500 rounded-tl-xl"
+                >
+                </div>
+                <div
+                  class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-pink-500 rounded-tr-xl"
+                >
+                </div>
+                <div
+                  class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-pink-500 rounded-bl-xl"
+                >
+                </div>
+                <div
+                  class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-pink-500 rounded-br-xl"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Estado del scanner -->
+          <div
+            id="scanner-status"
+            class="flex items-center justify-center gap-2 mt-4 text-gray-500"
+          >
+            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span class="text-sm">Buscando código QR...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Código Generado (oculto por defecto) -->
+      <div id="code-section" class="hidden">
+        <div
+          class="bg-gradient-to-br from-pink-500 via-pink-500 to-pink-600 rounded-3xl shadow-xl shadow-pink-500/25 p-8 text-center relative overflow-hidden"
+        >
+          <!-- Decoración de fondo -->
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16">
+          </div>
+          <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12">
+          </div>
+
+          <!-- Contenido -->
+          <div class="relative z-10">
+            <!-- Icono de éxito -->
+            <div
+              class="inline-flex items-center justify-center w-14 h-14 bg-white/20 backdrop-blur rounded-full mb-4"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-7 w-7 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+
+            <p class="text-pink-100 text-sm mb-1">Código para la cliente:</p>
+
+            <!-- Código grande -->
+            <div
+              id="generated-code"
+              class="text-5xl sm:text-6xl font-bold text-white tracking-[0.2em] my-5 font-mono"
+            >
+              0000
+            </div>
+
+            <!-- Timer con barra de progreso -->
+            <div class="mb-5">
+              <div class="flex items-center justify-center gap-2 mb-2">
+                <svg
+                  class="w-4 h-4 text-pink-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span id="timer" class="text-pink-100 text-sm font-medium">Válido por 2:00</span>
+              </div>
+              <!-- Barra de progreso -->
+              <div class="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
+                <div
+                  id="timer-bar"
+                  class="h-full bg-white rounded-full transition-all duration-1000"
+                  style="width: 100%"
+                >
+                </div>
+              </div>
+            </div>
+
+            <p class="text-pink-200/90 text-xs mb-5">
+              Dile este código a la cliente para que lo ingrese en su teléfono
+            </p>
+
+            <button
+              id="scan-again"
+              class="w-full bg-white text-pink-600 px-6 py-3.5 rounded-2xl font-semibold shadow-lg hover:bg-pink-50 active:scale-95 transition-all"
+            >
+              <span class="flex items-center justify-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  ></path>
+                </svg>
+                Escanear otro
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Historial reciente -->
+      <div
+        id="history-section"
+        class="bg-white rounded-2xl shadow-lg p-5 mt-5 relative overflow-hidden"
+      >
+        <!-- Decoración -->
+        <div class="absolute -top-6 -right-6 w-16 h-16 bg-pink-100 rounded-full opacity-40"></div>
+
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-base font-semibold text-gray-700 flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 text-pink-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Últimos escaneos
+            </h3>
+            <span class="text-xs text-gray-400">Hoy</span>
+          </div>
+          <div id="scan-history" class="space-y-2">
+            <div class="flex items-center justify-center py-6 text-gray-400">
+              <div class="text-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8 mx-auto mb-2 text-gray-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  ></path>
+                </svg>
+                <p class="text-sm">Sin escaneos recientes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instrucciones colapsable -->
+      <details class="mt-5 group">
+        <summary
+          class="bg-white rounded-xl p-4 cursor-pointer list-none flex items-center justify-between text-gray-600 hover:bg-pink-50 transition-colors shadow-sm"
+        >
+          <span class="flex items-center gap-2 font-medium text-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 text-pink-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            ¿Cómo funciona?
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 transition-transform group-open:rotate-180"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+        </summary>
+        <div class="bg-pink-50 rounded-b-xl p-4 mt-1 border-t border-pink-100">
+          <ol class="text-gray-600 text-sm space-y-3">
+            <li class="flex items-start gap-3">
+              <span
+                class="flex-shrink-0 w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-xs font-bold"
+                >1</span
+              >
+              <span>La cliente te muestra su QR</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span
+                class="flex-shrink-0 w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-xs font-bold"
+                >2</span
+              >
+              <span>Escaneas con esta cámara</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span
+                class="flex-shrink-0 w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-xs font-bold"
+                >3</span
+              >
+              <span>Aparece un código de 4 dígitos</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span
+                class="flex-shrink-0 w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-xs font-bold"
+                >4</span
+              >
+              <span>Le dices el código a la cliente</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span
+                class="flex-shrink-0 w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-xs font-bold"
+                >5</span
+              >
+              <span>Ella lo ingresa → <strong class="text-pink-500">¡Punto añadido!</strong></span>
+            </li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- Link para volver -->
+      <div class="text-center mt-6">
+        <a
+          href="/"
+          class="text-gray-400 hover:text-pink-500 transition-colors text-sm inline-flex items-center gap-1"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Volver al inicio
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Estilos del lector QR */
+  #qr-reader video {
+    border-radius: 1rem;
+    object-fit: cover;
+  }
+
+  #qr-reader__scan_region img {
+    display: none !important;
+  }
+
+  #qr-reader__dashboard {
+    padding: 0.75rem !important;
+    background: transparent !important;
+  }
+
+  #qr-reader__dashboard button {
+    background: linear-gradient(to right, #ec4899, #f472b6) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 0.75rem !important;
+    padding: 0.75rem 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+  }
+
+  #qr-reader__dashboard select {
+    background: white !important;
+    color: #374151 !important;
+    border: 1px solid #f9a8d4 !important;
+    border-radius: 0.5rem !important;
+    padding: 0.5rem !important;
+  }
+
+  #qr-reader__dashboard span {
+    color: #6b7280 !important;
+  }
+
+  /* Animación del código */
+  @keyframes pulse-code {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.03);
+    }
+  }
+
+  .animate-pulse-code {
+    animation: pulse-code 1.5s ease-in-out infinite;
+  }
+
+  /* Animación de esquinas */
+  @keyframes scan-pulse {
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  #scanner-section .border-pink-500 {
+    animation: scan-pulse 2s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode';
+  import { generateTimeBasedCode } from '../../scripts/loyalty';
+
+  // Elementos del DOM
+  const scannerSection = document.getElementById('scanner-section');
+  const codeSection = document.getElementById('code-section');
+  const generatedCode = document.getElementById('generated-code');
+  const timerDisplay = document.getElementById('timer');
+  const timerBar = document.getElementById('timer-bar');
+  const scanAgainBtn = document.getElementById('scan-again');
+  const scannerStatus = document.getElementById('scanner-status');
+  const scanHistory = document.getElementById('scan-history');
+
+  // Estado
+  let scanner: Html5QrcodeScanner | null = null;
+  let timerInterval: ReturnType<typeof setInterval> | null = null;
+  let history: { time: string; clientId: string; code: string }[] = [];
+  const TIMER_DURATION = 120; // 2 minutos
+
+  // Inicializar scanner
+  function initScanner() {
+    scanner = new Html5QrcodeScanner(
+      'qr-reader',
+      {
+        fps: 10,
+        qrbox: { width: 200, height: 200 },
+        supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+        rememberLastUsedCamera: true,
+        aspectRatio: 1,
+      },
+      false
+    );
+
+    scanner.render(onScanSuccess, onScanFailure);
+
+    if (scannerStatus) {
+      scannerStatus.innerHTML = `
+        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        <span class="text-sm">Buscando código QR...</span>
+      `;
+    }
+  }
+
+  // Manejo de escaneo exitoso
+  function onScanSuccess(clientId: string) {
+    // Validar que sea un UUID válido
+    if (!clientId || clientId.length < 8) {
+      return;
+    }
+
+    // Detener scanner temporalmente
+    if (scanner) {
+      scanner.pause(true);
+    }
+
+    // Generar código basado en tiempo
+    const code = generateTimeBasedCode(clientId);
+
+    // Reproducir sonido de éxito
+    playSuccessSound();
+
+    // Vibrar si está disponible
+    if (navigator.vibrate) {
+      navigator.vibrate([100, 50, 100]);
+    }
+
+    // Mostrar código
+    showCode(code, clientId);
+
+    // Agregar al historial
+    addToHistory(clientId, code);
+  }
+
+  // Manejo de error (ignorar - es normal mientras busca)
+  function onScanFailure(_error: string) {
+    // No hacer nada, es normal mientras busca
+  }
+
+  // Mostrar el código generado
+  function showCode(code: string, _clientId: string) {
+    if (!generatedCode || !codeSection || !scannerSection) return;
+
+    generatedCode.textContent = code;
+    generatedCode.classList.add('animate-pulse-code');
+
+    scannerSection.classList.add('hidden');
+    codeSection.classList.remove('hidden');
+
+    // Iniciar timer de 2 minutos
+    startTimer(TIMER_DURATION);
+  }
+
+  // Timer de expiración con barra de progreso
+  function startTimer(seconds: number) {
+    let remaining = seconds;
+
+    updateTimerDisplay(remaining, seconds);
+
+    timerInterval = setInterval(() => {
+      remaining--;
+      updateTimerDisplay(remaining, seconds);
+
+      if (remaining <= 0) {
+        clearInterval(timerInterval!);
+        resetToScanner();
+      }
+    }, 1000);
+  }
+
+  function updateTimerDisplay(remaining: number, total: number) {
+    if (!timerDisplay) return;
+
+    const mins = Math.floor(remaining / 60);
+    const secs = remaining % 60;
+    timerDisplay.textContent = `Válido por ${mins}:${secs.toString().padStart(2, '0')}`;
+
+    // Actualizar barra de progreso
+    if (timerBar) {
+      const percentage = (remaining / total) * 100;
+      timerBar.style.width = `${percentage}%`;
+    }
+
+    // Cambiar color si queda poco tiempo
+    if (remaining <= 30) {
+      timerDisplay.classList.add('text-yellow-300');
+      timerBar?.classList.add('bg-yellow-400');
+      timerBar?.classList.remove('bg-white');
+    }
+    if (remaining <= 10) {
+      timerDisplay.classList.remove('text-yellow-300');
+      timerDisplay.classList.add('text-red-300');
+      timerBar?.classList.remove('bg-yellow-400');
+      timerBar?.classList.add('bg-red-400');
+    }
+  }
+
+  // Volver al scanner
+  function resetToScanner() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+    }
+
+    if (codeSection && scannerSection) {
+      codeSection.classList.add('hidden');
+      scannerSection.classList.remove('hidden');
+    }
+
+    if (timerDisplay) {
+      timerDisplay.classList.remove('text-yellow-300', 'text-red-300');
+    }
+
+    if (timerBar) {
+      timerBar.style.width = '100%';
+      timerBar.classList.remove('bg-yellow-400', 'bg-red-400');
+      timerBar.classList.add('bg-white');
+    }
+
+    if (generatedCode) {
+      generatedCode.classList.remove('animate-pulse-code');
+    }
+
+    // Reanudar scanner
+    if (scanner) {
+      scanner.resume();
+    }
+  }
+
+  // Agregar al historial
+  function addToHistory(clientId: string, code: string) {
+    const now = new Date();
+    const time = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+
+    history.unshift({ time, clientId: clientId.slice(0, 8), code });
+
+    // Mantener solo los últimos 5
+    if (history.length > 5) {
+      history = history.slice(0, 5);
+    }
+
+    updateHistoryUI();
+  }
+
+  function updateHistoryUI() {
+    if (!scanHistory) return;
+
+    if (history.length === 0) {
+      scanHistory.innerHTML = `
+        <div class="flex items-center justify-center py-6 text-gray-400">
+          <div class="text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            <p class="text-sm">Sin escaneos recientes</p>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    scanHistory.innerHTML = history
+      .map(
+        (item, index) => `
+        <div class="flex items-center justify-between py-3 px-3 ${index !== history.length - 1 ? 'border-b border-pink-100' : ''} hover:bg-pink-50 rounded-lg transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-gray-700 text-sm font-mono">${item.clientId}...</p>
+              <p class="text-gray-400 text-xs">${item.time}</p>
+            </div>
+          </div>
+          <span class="font-bold text-pink-500 text-lg font-mono tracking-wide">${item.code}</span>
+        </div>
+      `
+      )
+      .join('');
+  }
+
+  // Sonido de éxito mejorado
+  function playSuccessSound() {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+
+      // Primer tono
+      const osc1 = audioContext.createOscillator();
+      const gain1 = audioContext.createGain();
+      osc1.connect(gain1);
+      gain1.connect(audioContext.destination);
+      osc1.frequency.value = 800;
+      osc1.type = 'sine';
+      gain1.gain.value = 0.2;
+      osc1.start();
+      osc1.stop(audioContext.currentTime + 0.12);
+
+      // Segundo tono (más alto)
+      setTimeout(() => {
+        const osc2 = audioContext.createOscillator();
+        const gain2 = audioContext.createGain();
+        osc2.connect(gain2);
+        gain2.connect(audioContext.destination);
+        osc2.frequency.value = 1200;
+        osc2.type = 'sine';
+        gain2.gain.value = 0.2;
+        osc2.start();
+        osc2.stop(audioContext.currentTime + 0.15);
+      }, 120);
+    } catch (e) {
+      // Audio no disponible, ignorar
+    }
+  }
+
+  // Event listeners
+  scanAgainBtn?.addEventListener('click', resetToScanner);
+
+  // Inicializar al cargar
+  initScanner();
+</script>

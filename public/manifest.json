@@ -83,6 +83,18 @@
           "sizes": "192x192"
         }
       ]
+    },
+    {
+      "name": "Mi Tarjeta de Fidelidad",
+      "short_name": "Mi Tarjeta",
+      "description": "Acumula puntos y obtén descuentos",
+      "url": "/mi-tarjeta",
+      "icons": [
+        {
+          "src": "/favicon/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

@@ -1,6 +1,23 @@
+/* Fuentes locales - Eliminan dependencia de Google Fonts para mejor rendimiento en Cuba */
+@import '@fontsource-variable/raleway';
+@import '@fontsource/satisfy';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Aplicar fuente Raleway globalmente */
+@layer base {
+  html {
+    font-family: 'Raleway Variable', system-ui, sans-serif;
+  }
+
+  body {
+    font-family: 'Raleway Variable', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
 
 /* Ocultar el SVG grande en pantallas pequeñas y mostrar el SVG pequeño */
 .small-svg {
@@ -33,4 +50,97 @@
 
 .animate-shine {
   animation: shine 3s infinite linear;
+}
+
+/* ========================================
+   SKELETON LOADERS - Para conexiones lentas
+   ======================================== */
+.skeleton-loader {
+  background: linear-gradient(90deg, #fce7f3 25%, #fbcfe8 50%, #fce7f3 75%);
+  background-size: 200% 100%;
+  animation: shimmer-skeleton 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+@keyframes shimmer-skeleton {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Imagen con skeleton automático mientras carga */
+.img-skeleton {
+  background: linear-gradient(90deg, #fce7f3 25%, #fbcfe8 50%, #fce7f3 75%);
+  background-size: 200% 100%;
+  animation: shimmer-skeleton 1.5s infinite;
+}
+
+.img-skeleton.loaded {
+  background: none;
+  animation: none;
+}
+
+/* ========================================
+   INDICADOR DE PÁGINA ACTIVA
+   ======================================== */
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #ec4899, #f472b6);
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+.nav-link:hover::after,
+.nav-link[aria-current='page']::after {
+  width: 100%;
+}
+
+.nav-link[aria-current='page'] {
+  color: #ec4899;
+  font-weight: 600;
+}
+
+/* ========================================
+   MICRO-INTERACCIONES
+   ======================================== */
+/* Botones con feedback táctil */
+.btn-interactive {
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn-interactive:active {
+  transform: scale(0.97);
+}
+
+/* Cards con elevación gradual */
+.card-hover {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -6px rgba(236, 72, 153, 0.25);
+}
+
+/* Focus visible para accesibilidad */
+.focus-ring:focus-visible {
+  outline: 2px solid #ec4899;
+  outline-offset: 2px;
 }

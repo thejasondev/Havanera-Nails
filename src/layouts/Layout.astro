@@ -2,12 +2,13 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 import SEOHead from '../components/seo/SEOHead.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
 import { siteConfig } from '../data/seo';
 import Analytics from '@vercel/analytics/astro';
 
-const { 
+const {
   title = siteConfig.title,
   description = siteConfig.description,
   image = siteConfig.ogImage,
@@ -17,7 +18,7 @@ const {
   noindex = false,
   nofollow = false,
   structuredDataType = 'organization',
-  structuredData
+  structuredData,
 } = Astro.props;
 ---
 
@@ -25,12 +26,12 @@ const {
 <html lang="es-CU">
   <head>
     <!-- Metadatos básicos -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- SEO Head Component -->
-    <SEOHead 
+    <SEOHead
       title={title}
       description={description}
       image={image}
@@ -40,30 +41,33 @@ const {
       noindex={noindex}
       nofollow={nofollow}
     />
-    
+
     <!-- Favicon -->
-    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" sizes="any">
-    <link rel="icon" href="/favicon/favicon-32x32.png" type="image/png" sizes="32x32">
-    <link rel="icon" href="/favicon/favicon-16x16.png" type="image/png" sizes="16x16">
-    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/favicon/android-chrome-192x192.png" type="image/png" sizes="192x192">
-    <link rel="icon" href="/favicon/android-chrome-512x512.png" type="image/png" sizes="512x512">
-    
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" sizes="any" />
+    <link rel="icon" href="/favicon/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" sizes="180x180" />
+    <link rel="icon" href="/favicon/android-chrome-192x192.png" type="image/png" sizes="192x192" />
+    <link rel="icon" href="/favicon/android-chrome-512x512.png" type="image/png" sizes="512x512" />
+
     <!-- Manifest para PWA -->
-    <link rel="manifest" href="/manifest.json">
-    
-    <!-- DNS Prefetch & Preconnect -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fuentes con display=swap para mejor performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Satisfy&display=swap" rel="stylesheet">
-    
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Theme color para PWA -->
+    <meta name="theme-color" content="#ec4899" />
+
+    <!-- Registro del Service Worker para modo offline -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+
     <!-- Verificación de Google Search Console -->
     <meta name="google-site-verification" content="A7BT_C6ClgkaWHA9brgG3v0v7gG-1NeclQ6jCfvQF8U" />
-    
+
     <!-- Datos estructurados JSON-LD -->
     <StructuredData type={structuredDataType} data={structuredData} />
 
@@ -73,22 +77,24 @@ const {
   <body class="antialiased">
     <Header />
     <slot />
+    <!-- Botón WhatsApp flotante global -->
+    <WhatsAppButton variant="floating" />
     <Footer />
-  </body>
-</html>
-<style is:global>
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    font-family: 'Raleway', sans-serif;
-  }
-  h1, h2 {
-    font-family: 'Satisfy', serif;
-  }
-  @media (prefers-reduced-motion: reduce) {
+  </body><style is:global>
     html {
-      scroll-behavior: auto;
+      scroll-behavior: smooth;
     }
-  }
-</style>
+    body {
+      font-family: 'Raleway Variable', system-ui, sans-serif;
+    }
+    h1,
+    h2 {
+      font-family: 'Satisfy', cursive;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</html>
