@@ -11,6 +11,10 @@ export interface LoyaltyData {
   history: { date: string; code: string }[];
   discountUsed: boolean;
   discountCode?: string;
+  // Seguridad nueva
+  lastCodeTimestamp?: number; // Para evitar replay attacks
+  failedAttempts?: number; // Para rate limiting
+  blockUntil?: number; // Timestamp de bloqueo
 }
 
 interface CodeData {
@@ -24,6 +28,8 @@ const STORAGE_KEY = 'havanera_loyalty';
 const CODE_STORAGE_KEY = 'havanera_active_code';
 const MAX_POINTS = 6;
 const CODE_EXPIRY_MS = 2 * 60 * 1000; // 2 minutos
+const MAX_FAILED_ATTEMPTS = 3;
+const BLOCK_DURATION_MS = 60 * 1000; // 1 minuto de bloqueo
 
 /**
  * Genera un UUID v4 simple
@@ -62,6 +68,8 @@ function createDefaultData(): LoyaltyData {
     createdAt: new Date().toISOString(),
     history: [],
     discountUsed: false,
+    failedAttempts: 0,
+    blockUntil: 0,
   };
 }
 
@@ -98,6 +106,7 @@ export function getClientId(): string {
  * Genera un código de activación temporal (para el dueño)
  */
 export function generateActivationCode(clientId: string): string {
+  // Generar código aleatorio de 4 dígitos
   const code = Math.floor(1000 + Math.random() * 9000).toString();
 
   const codeData: CodeData = {
@@ -121,40 +130,64 @@ export function validateAndAddPoint(inputCode: string): {
   message: string;
   points?: number;
   hasDiscount?: boolean;
+  blocked?: boolean; // Nuevo: indica si está bloqueado
 } {
   const client = getOrCreateClient();
+  const now = Date.now();
 
-  // Si ya tiene el descuento usado, no puede sumar más puntos
-  if (client.discountUsed) {
-    // Reiniciar para nuevo ciclo
-    client.points = 0;
-    client.discountUsed = false;
-    client.history = [];
+  // 1. Verificar bloqueo por Rate Limiting
+  if (client.blockUntil && now < client.blockUntil) {
+    const remainingSeconds = Math.ceil((client.blockUntil - now) / 1000);
+    return {
+      success: false,
+      message: `Sistema bloqueado temporalmente. Intenta en ${remainingSeconds}s`,
+      points: client.points,
+      blocked: true,
+    };
   }
 
-  // Verificar si ya tiene 6 puntos
+  // Si ya pasó el tiempo de bloqueo, resetear intentos
+  if (client.blockUntil && now >= client.blockUntil) {
+    client.blockUntil = 0;
+    client.failedAttempts = 0;
+    saveClient(client);
+  }
+
+  // 2. Si ya tiene el descuento disponible, no puede sumar más puntos sin canjear
   if (client.points >= MAX_POINTS) {
     return {
       success: false,
-      message: '¡Ya tienes todos los puntos! Canjea tu descuento.',
+      message: '¡Ya tienes 6 puntos! Canjea y reinicia tu tarjeta para seguir sumando.',
       points: client.points,
       hasDiscount: true,
     };
   }
 
-  // Validar el código (hash simple basado en el clientId)
-  const expectedCode = generateExpectedCode(client.clientId, inputCode);
+  // 3. Validar el código con reglas de seguridad
+  // Buscamos si el código coincide con algún timestamp reciente
+  const validTimestamp = getValidTimestampForCode(inputCode, client.clientId);
 
-  if (!isValidCode(inputCode, client.clientId)) {
+  if (validTimestamp === null) {
+    // Código inválido manejado como ataque potencial
+    return handleFailedAttempt(client);
+  }
+
+  // 4. Anti-Replay Attack: Verificar que el timestamp sea NUEVO
+  // El nuevo timestamp debe ser mayor estrictamente al último usado
+  if (client.lastCodeTimestamp && validTimestamp <= client.lastCodeTimestamp) {
     return {
       success: false,
-      message: 'Código inválido o expirado. Intenta de nuevo.',
+      message: 'Este código ya fue utilizado. Solicita uno nuevo.',
       points: client.points,
     };
   }
 
-  // Añadir punto
+  // 5. Éxito: Añadir punto y guardar estado
   client.points += 1;
+  client.failedAttempts = 0; // Resetear fallos
+  client.blockUntil = 0;
+  client.lastCodeTimestamp = validTimestamp; // Marcar timestamp como usado
+
   client.history.push({
     date: new Date().toISOString(),
     code: inputCode,
@@ -167,7 +200,7 @@ export function validateAndAddPoint(inputCode: string): {
   return {
     success: true,
     message: hasDiscount
-      ? '¡Felicidades! Completaste tu tarjeta. 🎉 Tienes 20% de descuento.'
+      ? '¡Felicidades! Completaste tu tarjeta. 🎉'
       : `¡Punto añadido! Llevas ${client.points}/${MAX_POINTS}`,
     points: client.points,
     hasDiscount,
@@ -175,29 +208,47 @@ export function validateAndAddPoint(inputCode: string): {
 }
 
 /**
- * Genera el código esperado basado en el clientId
- * Usa un algoritmo simple: combina clientId + timestamp actual (minuto)
+ * Maneja el incremento de intentos fallidos y bloqueo
  */
-function generateExpectedCode(clientId: string, inputCode: string): string {
-  // El código se genera en el escáner y se valida aquí
-  // Este es un placeholder - la validación real usa tiempo
-  return inputCode;
+function handleFailedAttempt(client: LoyaltyData) {
+  client.failedAttempts = (client.failedAttempts || 0) + 1;
+
+  let message = 'Código incorrecto.';
+  let blocked = false;
+
+  if (client.failedAttempts >= MAX_FAILED_ATTEMPTS) {
+    client.blockUntil = Date.now() + BLOCK_DURATION_MS;
+    message = 'Demasiados intentos fallidos. Sistema bloqueado por 1 minuto.';
+    blocked = true;
+  } else {
+    const remaining = MAX_FAILED_ATTEMPTS - client.failedAttempts;
+    message = `Código incorrecto. Te quedan ${remaining} intentos.`;
+  }
+
+  saveClient(client);
+
+  return {
+    success: false,
+    message,
+    points: client.points,
+    blocked,
+  };
 }
 
 /**
- * Valida si el código es válido para este cliente
- * Usa un sistema de tiempo: el código = hash(clientId + minuto actual)
+ * Verifica si el código corresponde a un timestamp válido de los últimos 5 minutos
+ * Retorna el timestamp si es válido, o null si no lo es.
  */
-function isValidCode(code: string, clientId: string): boolean {
-  // Verificar los últimos 3 minutos para dar margen
-  for (let i = 0; i < 3; i++) {
+function getValidTimestampForCode(code: string, clientId: string): number | null {
+  // Verificar los últimos 5 minutos (ventana de validez)
+  for (let i = 0; i < 5; i++) {
     const timestamp = Math.floor((Date.now() - i * 60000) / 60000);
     const expected = generateTimeBasedCode(clientId, timestamp);
     if (code === expected) {
-      return true;
+      return timestamp;
     }
   }
-  return false;
+  return null;
 }
 
 /**
@@ -207,13 +258,14 @@ export function generateTimeBasedCode(clientId: string, timestamp?: number): str
   const ts = timestamp ?? Math.floor(Date.now() / 60000);
 
   // Hash simple: suma de códigos ASCII + timestamp
+  // Usamos un algoritmo simple pero efectivo para modo offline
   let hash = 0;
-  const combined = clientId + ts.toString();
+  const combined = clientId + ts.toString() + 'HAVANERA_SECRET_SALT'; // Salt simple para más entropía
   for (let i = 0; i < combined.length; i++) {
     hash = ((hash << 5) - hash + combined.charCodeAt(i)) | 0;
   }
 
-  // Convertir a código de 4 dígitos
+  // Convertir a código de 4 dígitos positivo
   const code = Math.abs(hash % 10000)
     .toString()
     .padStart(4, '0');
@@ -221,35 +273,23 @@ export function generateTimeBasedCode(clientId: string, timestamp?: number): str
 }
 
 /**
- * Canjea el descuento
- */
-export function redeemDiscount(): { success: boolean; discountCode: string } {
-  const client = getOrCreateClient();
-
-  if (client.points < MAX_POINTS) {
-    return { success: false, discountCode: '' };
-  }
-
-  // Generar código de descuento único
-  const discountCode = `HAV20-${generateUUID().slice(0, 8).toUpperCase()}`;
-
-  client.discountUsed = true;
-  client.discountCode = discountCode;
-  saveClient(client);
-
-  return { success: true, discountCode };
-}
-
-/**
  * Reinicia la tarjeta después de usar el descuento
  */
-export function resetLoyaltyCard(): void {
+export function resetLoyaltyCard(): LoyaltyData {
   const client = getOrCreateClient();
+
+  // Guardamos el historial antiguo si quisiéramos (opcional),
+  // por ahora reinicio simple pero manteniendo el ID cliente
   client.points = 0;
   client.discountUsed = false;
   client.discountCode = undefined;
-  client.history = [];
+  client.history = []; // Limpiamos historial visible
+  // No reiniciamos lastCodeTimestamp para evitar que reusen códigos viejos inmediatos
+  client.failedAttempts = 0;
+  client.blockUntil = 0;
+
   saveClient(client);
+  return client;
 }
 
 /**
@@ -257,5 +297,5 @@ export function resetLoyaltyCard(): void {
  */
 export function hasDiscountAvailable(): boolean {
   const client = getOrCreateClient();
-  return client.points >= MAX_POINTS && !client.discountUsed;
+  return client.points >= MAX_POINTS;
 }

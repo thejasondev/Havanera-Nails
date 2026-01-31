@@ -130,29 +130,59 @@ const pageDescription =
       <!-- Modal de Descuento -->
       <div
         id="discount-modal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4"
+        class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] hidden items-center justify-center p-4 transition-opacity duration-300"
       >
         <div
-          class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center animate-bounce-in shadow-2xl"
+          class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center animate-bounce-in shadow-2xl relative overflow-hidden"
         >
-          <div class="text-6xl mb-4">🎉</div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-pink-500 mb-2">¡Felicidades!</h2>
+          <!-- Decoración -->
+          <div
+            class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500"
+          >
+          </div>
+
+          <div class="text-7xl mb-4 animate-pulse">🎉</div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">¡Felicidades!</h2>
           <p class="text-gray-600 mb-6">Completaste tu tarjeta de fidelidad</p>
 
           <div
-            class="bg-gradient-to-r from-pink-500 to-pink-400 text-white rounded-2xl p-6 mb-6 shadow-lg"
+            class="bg-gradient-to-br from-pink-500 to-purple-600 text-white rounded-2xl p-6 mb-6 shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300"
           >
-            <p class="text-lg mb-1">Tu descuento:</p>
-            <p class="text-5xl font-bold">20% OFF</p>
+            <p class="text-pink-100 text-sm mb-1 uppercase tracking-wider font-semibold">
+              Tu Descuento
+            </p>
+            <p class="text-5xl font-bold tracking-tight">20% OFF</p>
+            <div class="mt-2 text-xs bg-white/20 rounded-full py-1 px-3 inline-block">
+              Válido para tu próxima visita
+            </div>
           </div>
 
-          <p class="text-sm text-gray-500 mb-6">Muestra esta pantalla al momento de pagar</p>
+          <p class="text-sm text-gray-500 mb-6 px-4">
+            Muestra esta pantalla a la manicurista para aplicar el descuento.
+            <br /><span class="text-xs text-pink-500 font-medium"
+              >Al cerrar se reiniciarán tus puntos.</span
+            >
+          </p>
 
           <button
-            id="close-modal"
-            class="w-full bg-gray-100 text-gray-700 py-4 rounded-xl font-semibold hover:bg-gray-200 transition-colors text-lg"
+            id="redeem-btn"
+            class="w-full bg-gray-900 text-white py-4 rounded-xl font-bold hover:bg-black active:scale-95 transition-all text-lg shadow-xl flex items-center justify-center gap-2 group"
           >
-            ¡Entendido!
+            <span>Usar Descuento y Reiniciar</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 group-hover:rotate-180 transition-transform duration-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              ></path>
+            </svg>
           </button>
         </div>
       </div>
@@ -235,7 +265,12 @@ const pageDescription =
 
 <script>
   import QRCode from 'qrcode';
-  import { getOrCreateClient, validateAndAddPoint, hasDiscountAvailable } from '../scripts/loyalty';
+  import {
+    getOrCreateClient,
+    validateAndAddPoint,
+    hasDiscountAvailable,
+    resetLoyaltyCard,
+  } from '../scripts/loyalty';
 
   // Elementos del DOM
   const pointsDisplay = document.getElementById('points-display');
@@ -243,12 +278,12 @@ const pageDescription =
   const progressBar = document.getElementById('progress-bar');
   const progressText = document.getElementById('progress-text');
   const codeInput = document.getElementById('code-input') as HTMLInputElement;
-  const submitBtn = document.getElementById('submit-code');
+  const submitBtn = document.getElementById('submit-code') as HTMLButtonElement;
   const codeMessage = document.getElementById('code-message');
   const qrCanvas = document.getElementById('qr-canvas') as HTMLCanvasElement;
   const clientIdDisplay = document.getElementById('client-id');
   const discountModal = document.getElementById('discount-modal');
-  const closeModalBtn = document.getElementById('close-modal');
+  const redeemBtn = document.getElementById('redeem-btn');
   const codeSection = document.getElementById('code-section');
 
   // Inicializar
@@ -310,27 +345,25 @@ const pageDescription =
         <div class="text-center py-6">
           <div class="text-5xl mb-3">🎁</div>
           <p class="text-xl font-semibold text-pink-500 mb-2">¡Tarjeta completada!</p>
-          <p class="text-gray-600">Muestra tu descuento al pagar</p>
+          <p class="text-gray-600 mb-4">¡Tienes un 20% de descuento!</p>
           <button 
             id="show-discount"
-            class="mt-4 bg-gradient-to-r from-pink-500 to-pink-400 text-white px-6 py-3 rounded-xl font-semibold shadow-lg"
+            class="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg transform hover:scale-105 transition-all"
           >
             Ver mi descuento
           </button>
         </div>
       `;
-
-      // Agregar listener al nuevo botón
+      // Re-asociar evento al nuevo botón
       document.getElementById('show-discount')?.addEventListener('click', showDiscountModal);
     }
   }
 
-  // Generar QR - CORREGIDO: usa canvas directamente
+  // Generar QR - Usa canvas optimizado
   async function generateQR(clientId: string) {
     if (!qrCanvas) return;
 
     try {
-      // Generar QR directamente en el canvas
       await QRCode.toCanvas(qrCanvas, clientId, {
         width: 208,
         margin: 2,
@@ -342,16 +375,6 @@ const pageDescription =
       });
     } catch (error) {
       console.error('Error generando QR:', error);
-      // Fallback: mostrar ID como texto
-      const container = qrCanvas.parentElement;
-      if (container) {
-        container.innerHTML = `
-          <div class="w-44 h-44 sm:w-52 sm:h-52 flex flex-col items-center justify-center bg-pink-50 rounded-xl">
-            <p class="text-gray-500 text-sm mb-2">Tu ID:</p>
-            <p class="font-mono text-pink-500 font-bold text-lg break-all px-4 text-center">${clientId.slice(0, 12)}</p>
-          </div>
-        `;
-      }
     }
   }
 
@@ -360,14 +383,16 @@ const pageDescription =
     const code = codeInput?.value.trim();
 
     if (!code || code.length !== 4) {
-      showMessage('Ingresa un código de 4 dígitos', 'error');
+      showMessage('Ingresa el código de 4 dígitos', 'error');
       shakeInput();
       return;
     }
 
+    // Llamar a validar
     const result = validateAndAddPoint(code);
 
     if (result.success) {
+      // CASO ÉXITO
       showMessage(result.message, 'success');
       updateUI(result.points || 0, true);
 
@@ -378,16 +403,48 @@ const pageDescription =
 
       // Si completó tarjeta, mostrar modal
       if (result.hasDiscount) {
-        setTimeout(() => showDiscountModal(), 800);
+        setTimeout(() => showDiscountModal(), 1200);
       }
     } else {
+      // CASO ERROR O BLOQUEO
       showMessage(result.message, 'error');
-      shakeInput();
-      // Vibrar si está disponible
-      if (navigator.vibrate) {
-        navigator.vibrate(200);
+
+      if (result.blocked) {
+        // Bloquear UI temporalmente
+        blockUI();
+      } else {
+        shakeInput();
+        if (navigator.vibrate) navigator.vibrate(200);
       }
     }
+  }
+
+  // Bloquear UI por seguridad
+  function blockUI() {
+    if (codeInput) {
+      codeInput.value = '';
+      codeInput.disabled = true;
+      codeInput.placeholder = 'BLOQUEADO';
+      codeInput.classList.add('bg-gray-100', 'cursor-not-allowed');
+    }
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
+
+    // Desbloquear después de 60s (solo UI, el backend validará igual)
+    setTimeout(() => {
+      if (codeInput) {
+        codeInput.disabled = false;
+        codeInput.placeholder = '0000';
+        codeInput.classList.remove('bg-gray-100', 'cursor-not-allowed');
+        codeInput.focus();
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    }, 60000);
   }
 
   // Animación de shake para input inválido
@@ -402,18 +459,24 @@ const pageDescription =
     if (!codeMessage) return;
 
     codeMessage.textContent = text;
-    codeMessage.classList.remove('hidden', 'text-green-600', 'text-red-500');
-    codeMessage.classList.add(type === 'success' ? 'text-green-600' : 'text-red-500');
+    codeMessage.classList.remove('hidden', 'text-green-600', 'text-red-500', 'font-bold');
 
+    if (type === 'error') {
+      codeMessage.classList.add('text-red-500', 'font-bold');
+    } else {
+      codeMessage.classList.add('text-green-600');
+    }
+
+    // Limpiar timeout anterior si existe
+    // (Simple implementation, could be improved with closure)
     setTimeout(() => {
       codeMessage.classList.add('hidden');
-    }, 4000);
+    }, 5000);
   }
 
-  // Crear confetti mejorado
+  // Crear confetti
   function createConfetti() {
-    const colors = ['#ec4899', '#f472b6', '#fce7f3', '#a855f7', '#fbbf24'];
-
+    const colors = ['#ec4899', '#f472b6', '#a855f7', '#fbbf24'];
     for (let i = 0; i < 40; i++) {
       const confetti = document.createElement('div');
       confetti.className = 'confetti';
@@ -425,7 +488,6 @@ const pageDescription =
       confetti.style.height = `${size}px`;
       confetti.style.bottom = '0';
       document.body.appendChild(confetti);
-
       setTimeout(() => confetti.remove(), 3500);
     }
   }
@@ -438,6 +500,16 @@ const pageDescription =
     }
   }
 
+  // Reiniciar tarjeta
+  function handleRedeemAndReset() {
+    if (!confirm('¿La manicurista ya aplicó el descuento? Se reiniciarán tus puntos.')) {
+      return;
+    }
+
+    resetLoyaltyCard();
+    location.reload(); // Recargar para estado limpio
+  }
+
   // Event listeners
   submitBtn?.addEventListener('click', handleSubmit);
 
@@ -445,20 +517,19 @@ const pageDescription =
     if (e.key === 'Enter') handleSubmit();
   });
 
-  // Solo permitir números
   codeInput?.addEventListener('input', (e) => {
     const input = e.target as HTMLInputElement;
     input.value = input.value.replace(/\D/g, '').slice(0, 4);
   });
 
-  closeModalBtn?.addEventListener('click', () => {
-    discountModal?.classList.add('hidden');
-    discountModal?.classList.remove('flex');
-  });
+  // Listener para botón de canje
+  redeemBtn?.addEventListener('click', handleRedeemAndReset);
 
   // Cerrar modal al hacer click fuera
   discountModal?.addEventListener('click', (e) => {
     if (e.target === discountModal) {
+      // Opcional: Permitir cerrar sin canjear?
+      // Si cierran sin canjear, sigue lleno.
       discountModal.classList.add('hidden');
       discountModal.classList.remove('flex');
     }
