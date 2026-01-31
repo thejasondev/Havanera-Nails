@@ -236,12 +236,12 @@ function handleFailedAttempt(client: LoyaltyData) {
 }
 
 /**
- * Verifica si el código corresponde a un timestamp válido de los últimos 5 minutos
- * Retorna el timestamp si es válido, o null si no lo es.
+ * Verifica si el código corresponde a un timestamp válido
+ * Ventana: 1 minuto futuro (drift/rapid) a 5 minutos pasado
  */
 function getValidTimestampForCode(code: string, clientId: string): number | null {
-  // Verificar los últimos 5 minutos (ventana de validez)
-  for (let i = 0; i < 5; i++) {
+  // i = -1 (futuro 1 min), i = 0 (actual), i > 0 (pasado)
+  for (let i = -1; i <= 5; i++) {
     const timestamp = Math.floor((Date.now() - i * 60000) / 60000);
     const expected = generateTimeBasedCode(clientId, timestamp);
     if (code === expected) {

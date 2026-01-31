@@ -396,6 +396,11 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
   let history: { time: string; clientId: string; code: string }[] = [];
   const TIMER_DURATION = 120; // 2 minutos
 
+  // Estado para prevenir colisiones en escaneos consecutivos
+  let lastScannedId: string | null = null;
+  let lastScannedTime: number = 0;
+  let sameClientScanCount: number = 0;
+
   // Inicializar scanner con cámara trasera
   async function initScanner() {
     try {
@@ -410,36 +415,61 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
       // Intentar iniciar con la cámara trasera ('environment')
       await html5QrCode.start({ facingMode: 'environment' }, config, onScanSuccess, onScanFailure);
 
-      // Actualizar estado visual
-      if (scannerStatus) {
-        scannerStatus.innerHTML = `
-          <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-          <span class="text-sm">Escaneando...</span>
-        `;
-      }
+      updateScannerStatus('scanning');
     } catch (err) {
       console.error('Error al iniciar el scanner:', err);
-      if (scannerStatus) {
-        scannerStatus.innerHTML = `
-          <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-          <span class="text-sm text-red-500">Error de cámara: Permiso denegado</span>
-        `;
-      }
+      updateScannerStatus('error');
+    }
+  }
+
+  function updateScannerStatus(state: 'scanning' | 'error' | 'success') {
+    if (!scannerStatus) return;
+
+    if (state === 'scanning') {
+      scannerStatus.innerHTML = `
+        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        <span class="text-sm">Escaneando...</span>
+      `;
+    } else if (state === 'error') {
+      scannerStatus.innerHTML = `
+        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+        <span class="text-sm text-red-500">Error de cámara o permisos</span>
+      `;
     }
   }
 
   // Manejo de escaneo exitoso
   function onScanSuccess(decodedText: string, _decodedResult: any) {
-    // Validar formato UUID básico (aprox)
     if (!decodedText || decodedText.length < 8) return;
 
-    // Detener escaneo para ahorrar recursos y evitar lecturas múltiples
+    // Detener escaneo
     if (html5QrCode && html5QrCode.isScanning) {
       html5QrCode.pause(true);
     }
 
-    // Generar código
-    const code = generateTimeBasedCode(decodedText);
+    // Lógica Anti-Colisión para escaneos consecutivos del mismo cliente
+    const nowMinute = Math.floor(Date.now() / 60000);
+    let timeOffset = 0;
+
+    if (decodedText === lastScannedId && nowMinute === lastScannedTime) {
+      // Es el mismo cliente en el mismo minuto
+      sameClientScanCount++;
+      // Generar código para el minuto siguiente (permitido por tolerancia en loyalty.ts)
+      // Limitamos a +1 minuto para no irnos muy lejos
+      if (sameClientScanCount <= 1) {
+        timeOffset = 1;
+      }
+    } else {
+      // Nuevo cliente o nuevo minuto, resetear contadores
+      lastScannedId = decodedText;
+      lastScannedTime = nowMinute;
+      sameClientScanCount = 0;
+    }
+
+    // Generar código con el timestamp ajustado
+    // Nota: generateTimeBasedCode acepta un timestamp custom
+    const targetTimestamp = nowMinute + timeOffset;
+    const code = generateTimeBasedCode(decodedText, targetTimestamp);
 
     // Feedback usuario
     playSuccessSound();
@@ -450,9 +480,9 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
     addToHistory(decodedText, code);
   }
 
-  // Manejo de fallos (ruido constante, ignorar)
+  // Manejo de fallos
   function onScanFailure(_error: any) {
-    // No loguear para no ensuciar consola
+    // Silencio es oro
   }
 
   // Mostrar el código generado
@@ -476,6 +506,7 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
 
     updateTimerDisplay(remaining, seconds);
 
+    if (timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
       remaining--;
       updateTimerDisplay(remaining, seconds);
@@ -522,17 +553,16 @@ const pageDescription = 'Escáner QR para añadir puntos de fidelidad';
       scannerSection.classList.remove('hidden');
     }
 
-    if (generatedCode) generatedCode.classList.remove('animate-pulse-code');
+    if (generatedCode) {
+      generatedCode.classList.remove('animate-pulse-code');
+      // Limpiar texto para evitar 'flicker' del código anterior visualmente
+      generatedCode.textContent = '....';
+    }
 
     // Reanudar scanner
     if (html5QrCode) {
       html5QrCode.resume();
-      if (scannerStatus) {
-        scannerStatus.innerHTML = `
-          <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-          <span class="text-sm">Escaneando...</span>
-        `;
-      }
+      updateScannerStatus('scanning');
     }
   }
 
